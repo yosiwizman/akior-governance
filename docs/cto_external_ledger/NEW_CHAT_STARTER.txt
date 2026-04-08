@@ -1,0 +1,21 @@
+INSTRUCTION FOR FRESH CLAUDE CHAT SESSION
+
+Before doing anything, read the canonical ledger files at:
+  ~/akior/docs/cto_external_ledger/
+
+Start by reading:
+  1. RESTORE_BLOCK.txt (minimal restore state)
+  2. 03_STATUS.md (current project status)
+  3. 05_DECISIONS.md (decision chain)
+  4. 06_BLOCKERS.md (active blockers)
+  5. 07_NEXT_ACTION.md (next step)
+
+Then open with this exact sequence:
+  RESTORE STATUS
+  ACTIVE GOOGLE DIRECTION
+  CURRENT NEXT STEP
+  DRIFT CHECK
+
+Do not assume any prior context. Do not treat Google as solved.
+Do not treat OpenClaw GOG skill, gog CLI, or Claude Code MCP as approved paths.
+The approved direction is DEC-028: fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials.

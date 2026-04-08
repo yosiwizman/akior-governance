@@ -1,0 +1,30 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor backups
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# Sensitive files — never version credentials or secrets
+*.key
+*.pem
+*_secret.json
+*credentials*.json
+.env
+.env.*
+
+# Large binary archives
+*.tar.gz
+*.zip
+*.7z
+*.iso
+
+# Runtime logs — governance repo should never contain runtime state
+*.log
+*.log.gz
+*.log.txt
