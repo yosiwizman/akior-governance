@@ -3,6 +3,23 @@
 
 ---
 
+## LB-011 — Workspace Hygiene Pass + Ledger Durability Pass
+- **Completed:** 2026-04-08
+- **Action:** Two scope items closed in one ledger entry.
+- **Scope A — Workspace hygiene pass:** Captured the G-T06 Gmail chain and W-T01 through W-T04 WhatsApp chain into local git at ~/projects/akior/forge/jarvis-v5-os/ via a 4-phase gated process (Phase 0 audit, Phase 1 strategy, Phase 2 execution, Phase 3 verification). Four local commits created on main:
+  - 331619e: G-T06 Gmail OAuth refactor (4 files, +3/-82). Refs DEC-005, DEC-026, DEC-028, DEC-029.
+  - 2d773bf: WhatsApp DEC-032 + Gmail DEC-031 dual-chain (3 files, +605/-291). Refs DEC-005, DEC-031, DEC-032. Dual-chain files committed COMBINED (apps/server/src/index.ts, apps/web/app/settings/channels/page.tsx, apps/web/app/layout.tsx) because 554+ interleaved lines made hunk-split infeasible.
+  - 87f53d6: DEC-030 CLAUDE.md governance (1 file, +71/-0). Refs DEC-030.
+  - 409e4ed: Root .gitignore *.tar.gz guard (1 file, +2/-0) — prevents accidental commit of the 460MB Go 1.26.1 tarball sitting untracked in the repo root.
+  Typecheck verdict: PASS. Server clean. Web 5 pre-existing errors unchanged (app/setup/page.tsx, JarvisAssistant.tsx, AkiorDemo.tsx, AkiorMicDemo.tsx x2). Zero new errors introduced. Pre-existing dirt left in working tree. 10 commits ahead of origin/main, unpushed.
+- **Scope B — Ledger durability pass:** Initialized a dedicated git repo at ~/akior/ to version the canonical external ledger. Initial snapshot committed faithfully (12 canonical files + defensive .gitignore, no content edits). This LB-011 entry is the first normal ledger update under version control. Remote push deferred to a future task.
+- **Status deltas:**
+  - Uncommitted-chain filesystem-loss risk: RESOLVED (local commits on main).
+  - Ledger durability risk: RESOLVED locally (~/akior/ is now a git repo). Remote push still OPEN as a future task.
+  - WhatsApp message flow: latent partial, unchanged by this task.
+- **No feature code changed by the hygiene pass or by this ledger entry.**
+- **No remote push in either scope.**
+
 ## LB-010 — WhatsApp Slice Closure via W-T04.IMPL
 - **Completed:** 2026-04-08
 - **Action:** Recorded DEC-032 as PROVEN (end-to-end acceptance achieved). Updated 03_STATUS.md to reflect WhatsApp solved. Updated 06_BLOCKERS.md to mark BLK-001 and BLK-003 as RESOLVED. Recorded the W-T04.IMPL chain as the implementation that proved DEC-032.
