@@ -6,9 +6,9 @@
 
 ## CURRENT TASK
 
-**Task ID:** G-T06.D1 — Google Workspace refactor planning
-**Status:** QUEUED — PLANNING ONLY, no implementation
-**Notes:** Next major task: G-T06.D1 — Google Workspace refactor planning (PLANNING ONLY, no implementation). Google direction remains DEC-028 active (fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials). DEC-027 remains superseded. Google is NOT solved. Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing. Do not begin G-T06.D1 implementation in this phase. Do not start OAuth flow work. WhatsApp send lane is closed for this workstream.
+**Task ID:** I9-OPS — Internal Google credential provisioning
+**Status:** SCHEDULED — separate bounded CTO/terminal-engineer task
+**Notes:** G-T06.D1 planning COMPLETE (plan durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md`). G-T06.D2 preconditions CLOSED. Next step: I9-OPS provisions `data/google-credentials.json` server-side (CTO/terminal-engineer only, CEO never involved). After I9-OPS: first bounded Google implementation slice, gated by CTO approval. Google is NOT solved. DEC-028 active, DEC-027 superseded. Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
 
 ---
 

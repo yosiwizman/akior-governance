@@ -49,5 +49,11 @@
 6. Do NOT reopen Phases 0 through 4.12B
 7. Do NOT push jarvis-v5-os (three local-only commits remain; pushing is a separate bounded task)
 
+### Google Planning (G-T06.D1 + D2 complete)
+- G-T06.D1 plan artifact durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md` (sha256 `ef66430f...`)
+- G-T06.D2 preconditions closed: D1 durable, I9-OPS defined + scheduled, DELETE refs analyzed, REWRITE test plan produced
+- I9-OPS: scheduled as separate bounded CTO task (provisions `data/google-credentials.json` server-side)
+- Google remains NOT solved until I9-OPS + implementation + end-user flow proven
+
 ## Prior Handoff (superseded)
 - Prior handoff anchor 2026-04-09 (pre Phase 4.12B) said WhatsApp send NOT SOLVED and Phase 4.6 was next. That is now superseded by the verified success above.

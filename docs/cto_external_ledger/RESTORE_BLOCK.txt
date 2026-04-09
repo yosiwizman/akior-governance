@@ -23,7 +23,10 @@ GOOGLE TRACK (UNCHANGED):
 - DEC-032: ACTIVE AND PROVEN (WhatsApp link + send).
 - Google read/send: NOT SOLVED. No API tokens exist.
 - Calendar/Drive/Contacts: NOT solved.
-- Next major task: G-T06.D1 Google Workspace refactor PLANNING ONLY.
+- G-T06.D1 plan: COMPLETE and durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md`.
+- G-T06.D2 preconditions: CLOSED. Test plan and I9-OPS definition durable in governance.
+- Next step: I9-OPS (internal credential provisioning, CTO/terminal-engineer only, NOT CEO).
+- Then: first bounded Google implementation slice, gated by CTO approval.
 - Do NOT collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing.
 
 PROVEN WORKING:
