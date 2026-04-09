@@ -3,6 +3,25 @@
 
 ---
 
+## LB-012 — Remote Durability Pass Closure
+- **Completed:** 2026-04-08
+- **Action:** Both project repos brought under offsite version control on GitHub.
+- **Scope:** 4-phase gated process — Phase 0 audit + verification spike, Phase 1 strategy, Phase 2 execution with intra-phase STOP gates, Phase 3 final verification.
+- **jarvis-v5-os:** Pushed 10 local commits to github.com/yosiwizman/jarvis-v5-os via HTTPS. origin/main advanced 40f919b → 409e4ed. 4 hygiene-pass commits (331619e, 2d773bf, 87f53d6, 409e4ed) plus 6 pre-existing commits (85dc65a, 65b901c, 6005472, 568bf65, 35bb77e, 1a4e838). Post-push fetch confirmed 0 ahead / 0 behind.
+- **akior-governance:** Initialized new private GitHub repo at github.com/yosiwizman/akior-governance. Pushed 2 commits (7b29480 initial snapshot, 70dbc62 LB-011 entry) via `git push -u origin main` to establish upstream tracking. Post-push fetch confirmed 0 ahead / 0 behind.
+- **Auth:** HTTPS via `gh` credential helper. Initial Phase 2 Step 1 fetch failed with exit 128 ("could not read Username") because no credential helper was configured. Resolved by CEO running `gh auth login` (web browser flow). Phase 2 re-issued cleanly after credential helper verified.
+- **Safety posture:** Every network operation wrapped with `set -o pipefail` + sed redaction pipeline to prevent credential leakage through transport-layer messages and to preserve the git exit status through the pipe. No force operations, no destructive ops, no merges, no rebases, no branch protection bypass attempts from Claude Code.
+- **Governance note:** GitHub reported "Bypassed rule violations" on the jarvis-v5-os push — the yosiwizman admin account has bypass privilege on the repo's 6 required CI status checks on main. This is server-side permission, not a Claude Code action, but it means direct pushes to main from admin accounts skip CI validation on this repo. Recorded here for future decision on whether to tighten the bypass rule or accept it as the current trust model.
+- **Status deltas:**
+  - jarvis-v5-os filesystem-loss risk: RESOLVED (local commits + offsite remote).
+  - Ledger filesystem-loss risk: RESOLVED (local commits + offsite remote).
+  - "10 commits ahead of origin/main" on jarvis-v5-os: RESOLVED (0 ahead / 0 behind).
+  - LB-011 drift: RESOLVED (committed locally in LB-011 commit, pushed to remote in this pass).
+  - WhatsApp active message flow: latent partial, unchanged.
+  - 5 pre-existing typecheck errors in jarvis-v5-os: scope-separate debt, unchanged.
+  - New: admin branch protection bypass on jarvis-v5-os, noted but not remediated.
+- **This is the first ledger update made under full version control.** Future ledger writes follow this workflow: edit 01_LEDGER.md, commit locally, push to origin/main on akior-governance.
+
 ## LB-011 — Workspace Hygiene Pass + Ledger Durability Pass
 - **Completed:** 2026-04-08
 - **Action:** Two scope items closed in one ledger entry.
