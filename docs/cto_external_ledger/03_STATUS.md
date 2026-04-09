@@ -6,11 +6,11 @@
 - **Google Gmail status:** Gmail connection card SOLVED via OpenClaw browser-session lane (DEC-031). Gmail read/send NOT solved (no API tokens). Calendar, Drive, Contacts not yet solved. DEC-028 active, DEC-027 superseded.
 - **WhatsApp Product 1 status:**
   - **Link:** SOLVED via DEC-032 (QR link proven 2026-04-08, creds persisted).
-  - **Send:** NOT SOLVED. W-T05 Phase 3 implementation complete (commit 8f1b188, Direction A gateway RPC). Phase 4 one-send attempt FAILED (device pairing at gateway handshake). Phase 4.5 audit diagnosed and locked fix (Option A: `deviceIdentity: null`). Phase 4.6 is next.
-- **Active channel decisions:** DEC-028 (OAuth fallback), DEC-029 (Product 1 Option A), DEC-031 (Gmail browser-session), DEC-032 (WhatsApp link, PROVEN)
+  - **Send:** VERIFIED END-TO-END SUCCESS (Phase 4.12B, 2026-04-09). HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, unique test string `AKIOR-W-T05-P412B-20260409T174414Z-g7U31x` physically received on CEO phone. Gateway remained active post-send. Listener remained connected. BLK-003 CLOSED.
+- **Active channel decisions:** DEC-028 (OAuth fallback), DEC-029 (Product 1 Option A), DEC-031 (Gmail browser-session), DEC-032 (WhatsApp link + send, PROVEN)
 - **Superseded:** DEC-027
-- **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit)
-- **Next major step:** W-T05 Phase 4.6 — apply `deviceIdentity: null` fix + one real send + require CEO physical phone receipt. WhatsApp send remains NOT SOLVED until physical receipt confirmed.
+- **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit) → Phase 4.12B (VERIFIED SUCCESS)
+- **Next major step:** G-T06.D1 — Google Workspace refactor PLANNING ONLY. DEC-028 active, DEC-027 superseded, Google NOT solved.
 
 ## What Works
 - Chat text: Verified PASS (local qwen2.5:72b)

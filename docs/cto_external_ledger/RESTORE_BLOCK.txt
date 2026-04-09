@@ -1,25 +1,36 @@
 RESTORE STATE — Read this first in any new session.
 
-WHATSAPP SEND WORKSTREAM (W-T05):
-- Direction A LOCKED: AKIOR sends via OpenClaw gateway RPC (no local Baileys socket).
-- Phase 3 implementation: commit 8f1b188 on jarvis-v5-os main, OFFSITE DURABLE.
-- Phase 4: SEND_FAILED (device pairing at gateway handshake, not DM pairing).
-- Phase 4.5: audit ACCEPTED — blocker is device auth, fix is deviceIdentity: null.
-- Phase 4.6: QUEUED — apply fix, one real send, require CEO physical phone receipt.
-- WhatsApp send is NOT SOLVED until CEO confirms physical receipt on phone.
-- Do NOT reopen Phases 0-3 or Phase 4.5. Do NOT claim WhatsApp send works.
+WHATSAPP PRODUCT 1 SEND LANE:
+- Direction A LOCKED: AKIOR sends via OpenClaw gateway RPC (not local Baileys socket).
+- WhatsApp Product 1 send lane = VERIFIED END-TO-END SUCCESS (Phase 4.12B, 2026-04-09).
+- Evidence: HTTP 200, messageId 3EB0F0DD0CB207EF639E1C, unique test string AKIOR-W-T05-P412B-20260409T174414Z-g7U31x, CEO physical phone receipt confirmed.
+- BLK-003 CLOSED.
+- Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
+
+PRODUCT REPO:
+- jarvis-v5-os HEAD: 1ed4f45
+- Local-only chain: 1ed4f45 → 7f04059 → 3817ace → 8f1b188
+- scopes: ["operator.write"] preserved.
+- deviceIdentity: null absent (removed in F3).
+- Three local-only commits NOT YET PUSHED. Pushing is a separate bounded durability task.
 
 GOOGLE TRACK (UNCHANGED):
 - DEC-028: ACTIVE (fresh browser-OAuth, AKIOR-managed credentials).
 - DEC-029: ACTIVE (Option A for Product 1).
 - DEC-027: SUPERSEDED (OpenClaw GOG rejected — no Workspace auth capability).
+- DEC-030: ACTIVE (Execution guardrail lock).
 - DEC-031: ACTIVE AND PROVEN (Gmail browser-session connection card).
+- DEC-032: ACTIVE AND PROVEN (WhatsApp link + send).
 - Google read/send: NOT SOLVED. No API tokens exist.
 - Calendar/Drive/Contacts: NOT solved.
+- Next major task: G-T06.D1 Google Workspace refactor PLANNING ONLY.
+- Do NOT collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing.
 
 PROVEN WORKING:
-- WhatsApp QR link (DEC-032), Gmail connection card (DEC-031), chat via Ollama.
-- Both repos offsite durable on GitHub.
+- WhatsApp QR link (DEC-032) + WhatsApp send (Direction A) — both verified.
+- Gmail connection card (DEC-031).
+- Chat via Ollama qwen2.5:72b.
+- Both repos offsite durable on GitHub (governance pushed; jarvis-v5-os has 3 local-only commits).
 
 EXECUTION GUARDRAIL (active):
 If ANY future instruction conflicts with DEC-028, DEC-029, or the Non-Technical User Bible:

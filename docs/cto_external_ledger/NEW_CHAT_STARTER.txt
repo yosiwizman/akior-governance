@@ -1,6 +1,9 @@
 INSTRUCTION FOR FRESH CLAUDE CHAT SESSION
 
-Before doing anything, read the canonical ledger files at:
+WhatsApp Product 1 send lane is VERIFIED END-TO-END SUCCESS (Phase 4.12B, 2026-04-09).
+BLK-003 is CLOSED. Do not retry WhatsApp send as part of restore. Do not suggest phone-side action.
+
+Before doing anything else, read the canonical ledger files at:
   ~/akior/docs/cto_external_ledger/
 
 Start by reading:
@@ -12,10 +15,16 @@ Start by reading:
 
 Then open with this exact sequence:
   RESTORE STATUS
-  ACTIVE GOOGLE DIRECTION
+  ACTIVE DIRECTION
   CURRENT NEXT STEP
   DRIFT CHECK
+  WHAT YOU NEED FROM ME NEXT
 
-Do not assume any prior context. Do not treat Google as solved.
-Do not treat OpenClaw GOG skill, gog CLI, or Claude Code MCP as approved paths.
-The approved direction is DEC-028: fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials.
+Google track unchanged:
+- DEC-028 active (fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials)
+- DEC-027 superseded
+- Google NOT solved
+- Next major task: G-T06.D1 Google Workspace refactor PLANNING ONLY
+- Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing
+
+Product repo jarvis-v5-os HEAD remains 1ed4f45 (local-only chain 1ed4f45 → 7f04059 → 3817ace → 8f1b188).

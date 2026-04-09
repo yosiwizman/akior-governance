@@ -77,4 +77,8 @@
 - **Risks acknowledged (to be addressed in W-T04):** (1) Hashed filenames change across OpenClaw versions. (2) Function contract with runtime/accountId parameters needs live pre-flight test. (3) Credential directory writes need permission verification. (4) Process lifetime and cleanup on crash/restart need documented contract.
 - **Non-Technical Bible compliance:** CEO sees AKIOR only. Click "Connect WhatsApp" → QR renders in AKIOR card → scan with phone → card updates to Connected. No terminal, no dashboard, no redirect, no iframe, no popup, no secrets, no Developer Console.
 - **Rejected alternatives:** WS-RPC client (simpler via direct import), CLI spawn (more reliable via direct import), dashboard redirect/iframe/popup (REJECTED — violates Non-Technical Bible).
-- **Proof pending:** W-T04 end-to-end test.
+- **Proof:** W-T04 link proven 2026-04-08. W-T05 send proven 2026-04-09 via Direction A (gateway RPC). Phase 4.12B HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, CEO physical phone receipt confirmed.
+
+---
+
+**Execution confirmation 2026-04-09:** Direction A (AKIOR → OpenClaw gateway RPC) is now proven end-to-end for WhatsApp Product 1. See 04_TEST_LOG.md Phase 4.12B entry for evidence. DEC-031 (Gmail via OpenClaw managed-browser lane) and DEC-032 (WhatsApp via direct Node import of OpenClaw core functions) remain active. DEC-028 remains active and DEC-027 remains superseded. Google track is unchanged.
