@@ -1,14 +1,16 @@
 # 03_STATUS.md — Current Project Status
 
-- **Anchor date:** 2026-04-07
+- **Anchor date:** 2026-04-09
 - **Active product:** AKIOR Full (Product 1)
 - **Current batch:** Batch G — Channels, Skills & Infrastructure
-- **Google Gmail status:** SOLVED via OpenClaw browser-session lane (DEC-031). Calendar, Drive, Contacts not yet solved.
-- **WhatsApp Product 1 status:** SOLVED via DEC-032 (direct Node import of OpenClaw core functions). End-to-end acceptance confirmed 2026-04-08.
-- **Active channel decisions:** DEC-028 (OAuth fallback), DEC-029 (Product 1 Option A), DEC-031 (Gmail browser-session), DEC-032 (WhatsApp direct-import, PROVEN)
+- **Google Gmail status:** Gmail connection card SOLVED via OpenClaw browser-session lane (DEC-031). Gmail read/send NOT solved (no API tokens). Calendar, Drive, Contacts not yet solved. DEC-028 active, DEC-027 superseded.
+- **WhatsApp Product 1 status:**
+  - **Link:** SOLVED via DEC-032 (QR link proven 2026-04-08, creds persisted).
+  - **Send:** NOT SOLVED. W-T05 Phase 3 implementation complete (commit 8f1b188, Direction A gateway RPC). Phase 4 one-send attempt FAILED (device pairing at gateway handshake). Phase 4.5 audit diagnosed and locked fix (Option A: `deviceIdentity: null`). Phase 4.6 is next.
+- **Active channel decisions:** DEC-028 (OAuth fallback), DEC-029 (Product 1 Option A), DEC-031 (Gmail browser-session), DEC-032 (WhatsApp link, PROVEN)
 - **Superseded:** DEC-027
-- **Ledger:** LB-001 → LB-002 → LB-003 → LB-005 → LB-009 → LB-010 (WhatsApp slice closure)
-- **Next major step:** LB-010 complete. No queued feature tasks. Future slices (Calendar, Drive, Contacts, iMessage) pending CEO prioritization. Workspace hygiene pass pending (5 pre-existing typecheck errors, uncommitted chain work).
+- **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit)
+- **Next major step:** W-T05 Phase 4.6 — apply `deviceIdentity: null` fix + one real send + require CEO physical phone receipt. WhatsApp send remains NOT SOLVED until physical receipt confirmed.
 
 ## What Works
 - Chat text: Verified PASS (local qwen2.5:72b)

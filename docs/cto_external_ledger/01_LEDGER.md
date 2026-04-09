@@ -3,6 +3,40 @@
 
 ---
 
+## LB-015 — W-T05 Phase 4.5 audit recharacterized the blocker as device pairing at gateway handshake
+- **Completed:** 2026-04-09
+- **Repo under audit:** OpenClaw gateway runtime / local environment
+- **Verdict:** AUDIT_COMPLETE
+- **Summary:** Phase 4.5 performed a read-only OpenClaw pairing policy audit and established that the prior Phase 4 failure was NOT DM/contact pairing. The true blocker was device pairing at the WebSocket handshake level.
+- **Accepted diagnosis:** Phase 4 failed before the RPC send method was actually dispatched. AKIOR's GatewayClient auto-loaded a device identity because `deviceIdentity` was not explicitly set. The gateway rejected that unpaired device during connection handshake and returned `pairing required`.
+- **Evidence anchors:**
+  - Device pairing gate: `gateway-cli-CWpalJNJ.js:26944` — `if (device && devicePublicKey && !skipPairing)`
+  - Rejection path: `gateway-cli-CWpalJNJ.js:27048-27054` — emits NOT_PAIRED / "pairing required", closes with code 1008
+  - GatewayClient auto-load: `method-scopes-DNlWj6m4.js:2030` — `deviceIdentity: opts.deviceIdentity === null ? void 0 : opts.deviceIdentity ?? loadOrCreateDeviceIdentity()`
+- **Accepted fix direction:** Option A locked — set `deviceIdentity: null` so no device identity is sent and the pairing check is structurally skipped.
+- **Rejected alternatives:** Option B (dmPolicy config change — wrong layer), Option C (inbound CEO message — wrong diagnosis), Option D (approve AKIOR as paired device — viable but unnecessary).
+- **Guardrail note:** WhatsApp send remained NOT SOLVED after the audit. Phase 4.6 is next.
+
+## LB-014 — W-T05 Phase 4 verification attempted one real send and failed cleanly
+- **Completed:** 2026-04-08
+- **Repo:** `~/projects/akior/forge/jarvis-v5-os` (main, commit 8f1b188)
+- **Verification type:** One real send attempt
+- **Verdict:** SEND_FAILED
+- **Summary:** Phase 4 executed one real AKIOR-side send attempt to phone +\*\*\*8490 through the accepted WhatsApp route. The send did not deliver. The response was a gateway RPC failure with detail `pairing required`.
+- **Observed result:** HTTP 502, error `gateway_rpc_error`, detail `pairing required`, response time ~77ms. No message delivered to phone.
+- **What this proved:** The AKIOR route executed; the AKIOR-to-gateway path was live enough to return a semantic failure; WhatsApp send remained blocked.
+- **Historical note:** At the time of Phase 4 review, the failure was initially interpreted as DM/contact pairing. That interpretation was later corrected by LB-015 (device pairing at gateway handshake).
+- **Guardrail note:** Gmail smoke remained protected. No WhatsApp success was claimed. The workstream remained NOT SOLVED.
+
+## LB-013 — W-T05 Phase 3 implementation committed and made ready for verification
+- **Completed:** 2026-04-08
+- **Repo:** `~/projects/akior/forge/jarvis-v5-os` (main, commit 8f1b188)
+- **Verdict:** COMPLETE
+- **Summary:** Phase 3 implemented Direction A on the AKIOR side by wiring WhatsApp send through the OpenClaw gateway RPC path rather than a local Baileys socket. The accepted implementation point is commit `8f1b188`.
+- **What was established:** `POST /api/channels/whatsapp/send` exists on the AKIOR server side. Gateway runtime import path resolved. Verdict A import direction accepted: `openclaw/plugin-sdk/gateway-runtime` exposing `GatewayClient`. Helper implemented in `apps/server/src/whatsapp-send.ts`. Validation discipline passed. 5-error web baseline unchanged.
+- **Evidence anchors:** Commit `8f1b188`, route `POST /api/channels/whatsapp/send`, helper `apps/server/src/whatsapp-send.ts`.
+- **Notes:** This entry records implementation durability only. It does NOT mean WhatsApp send was proven end-to-end. End-to-end proof was deferred to Phase 4 verification.
+
 ## LB-012 — Remote Durability Pass Closure
 - **Completed:** 2026-04-08
 - **Action:** Both project repos brought under offsite version control on GitHub.

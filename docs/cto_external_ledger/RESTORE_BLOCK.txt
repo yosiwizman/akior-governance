@@ -1,15 +1,25 @@
 RESTORE STATE — Read this first in any new session.
 
-DEC-028 is ACTIVE.
-DEC-029 is ACTIVE (narrows DEC-028 for Product 1 only).
-DEC-027 is SUPERSEDED.
-Google is NOT solved.
-OpenClaw GOG skill is REJECTED on current stack (no Workspace auth capability).
-gog CLI is FORBIDDEN (Developer Console + client_secret.json required).
-Claude Code MCP is NOT the AKIOR product architecture (Anthropic-managed, outside Jarvis V5 OS).
-Approved direction = fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials.
-Next step = CTO review after G-T06.I9-GUARDRAIL-LOCK. I9-OPS is NOT approved until explicitly cleared by CTO.
-WhatsApp = BLK-001 session conflict (both machines competing), BLK-003 never end-to-end tested.
+WHATSAPP SEND WORKSTREAM (W-T05):
+- Direction A LOCKED: AKIOR sends via OpenClaw gateway RPC (no local Baileys socket).
+- Phase 3 implementation: commit 8f1b188 on jarvis-v5-os main, OFFSITE DURABLE.
+- Phase 4: SEND_FAILED (device pairing at gateway handshake, not DM pairing).
+- Phase 4.5: audit ACCEPTED — blocker is device auth, fix is deviceIdentity: null.
+- Phase 4.6: QUEUED — apply fix, one real send, require CEO physical phone receipt.
+- WhatsApp send is NOT SOLVED until CEO confirms physical receipt on phone.
+- Do NOT reopen Phases 0-3 or Phase 4.5. Do NOT claim WhatsApp send works.
+
+GOOGLE TRACK (UNCHANGED):
+- DEC-028: ACTIVE (fresh browser-OAuth, AKIOR-managed credentials).
+- DEC-029: ACTIVE (Option A for Product 1).
+- DEC-027: SUPERSEDED (OpenClaw GOG rejected — no Workspace auth capability).
+- DEC-031: ACTIVE AND PROVEN (Gmail browser-session connection card).
+- Google read/send: NOT SOLVED. No API tokens exist.
+- Calendar/Drive/Contacts: NOT solved.
+
+PROVEN WORKING:
+- WhatsApp QR link (DEC-032), Gmail connection card (DEC-031), chat via Ollama.
+- Both repos offsite durable on GitHub.
 
 EXECUTION GUARDRAIL (active):
 If ANY future instruction conflicts with DEC-028, DEC-029, or the Non-Technical User Bible:

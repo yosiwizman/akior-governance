@@ -13,9 +13,12 @@
 - **Resolution (Calendar/Drive/Contacts):** Future slices — mirror DEC-031 pattern when prioritized.
 
 ## BLK-003 — WhatsApp AI Desktop End-to-End Not Tested
-- **Status:** RESOLVED 2026-04-08
-- **Severity:** Closed
-- **Detail:** W-T04.IMPL Phase 3 was the first successful WhatsApp end-to-end test on AI Desktop. CEO performed real QR scan via AKIOR Channels UI at localhost:3000/settings/channels. Card flipped to "WhatsApp Connected" within the scan window. creds.json persisted at 1840 bytes (818 session files total). openclaw channels list confirmed "linked, enabled".
+- **Status:** PARTIALLY RESOLVED — link proven, send NOT proven
+- **Severity:** Medium (active message flow still unverified)
+- **Link status:** RESOLVED 2026-04-08. QR link proven via W-T04.IMPL Phase 3 (CEO QR scan, creds persisted, openclaw reports "linked, enabled").
+- **Send status:** NOT RESOLVED. W-T05 Phase 3 implementation complete (commit 8f1b188, Direction A gateway RPC). Phase 4 one-send attempt SEND_FAILED (HTTP 502, `gateway_rpc_error`, `pairing required`). Phase 4.5 audit diagnosed: blocker was device pairing at WebSocket handshake — AKIOR's GatewayClient auto-created a device identity that was not registered as a paired device. Fix locked: Option A (`deviceIdentity: null`). Phase 4.6 is next.
+- **Current blocker:** Device pairing at gateway handshake until Phase 4.6 applies `deviceIdentity: null`. This is a partial blocker (one-line code fix), not an architectural failure.
+- **Resolution path:** Phase 4.6 applies fix, executes one real send, requires CEO physical phone receipt confirmation.
 
 ## BLK-004 — Option A Does Not Scale to AKIOR Light (Product 2)
 - **Status:** ACTIVE — does NOT block Product 1, blocks Product 2 Google work only
