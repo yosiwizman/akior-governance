@@ -6,9 +6,9 @@
 
 ## CURRENT TASK
 
-**Task ID:** I9-OPS — Internal Google credential provisioning
-**Status:** SCHEDULED — separate bounded CTO/terminal-engineer task
-**Notes:** G-T06.D1 planning COMPLETE (plan durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md`). G-T06.D2 preconditions CLOSED. Next step: I9-OPS provisions `data/google-credentials.json` server-side (CTO/terminal-engineer only, CEO never involved). After I9-OPS: first bounded Google implementation slice, gated by CTO approval. Google is NOT solved. DEC-028 active, DEC-027 superseded. Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
+**Task ID:** OPS-CRED-01 rerun (after asset delivery) → then I9-OPS
+**Status:** BLOCKED — OPS-CRED-01 completed 2026-04-09 with verdict `OPS_CRED_SOURCE_BLOCKED_MISSING_AKIOR_OWNED_GOOGLE_OAUTH_CLIENT`. Handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md`.
+**Notes:** Next major task: deliver the missing AKIOR-internal Google OAuth client credentials via one of the acceptable non-interactive operator-only channels named in `~/.akior/ops/OPS-CRED-01-HANDOFF.md`, then re-run OPS-CRED-01. I9-OPS is NOT scheduled until OPS-CRED-01 succeeds. Do not begin any Google implementation work. Do not start any OAuth flow. Do not involve the CEO. Google remains NOT solved. DEC-028 active, DEC-027 superseded. Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
 
 ---
 

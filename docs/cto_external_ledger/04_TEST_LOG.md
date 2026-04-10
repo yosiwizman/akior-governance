@@ -3,6 +3,17 @@
 
 ---
 
+## OPS-CRED-01 — Operator-Side Google Credential Source Preparation
+- **Date:** 2026-04-09
+- **Test type:** Operator-only credential source discovery and directory preparation (no Google endpoint contact, no OAuth flow)
+- **Verdict:** BLOCKED. No AKIOR-internal Google OAuth client credential source is available in the current operator environment.
+- **Action:** BLOCKED_HANDOFF_WRITTEN. Operator-only handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md` (outside product repo, 0600, operator-owned).
+- **No credentials file created.** No placeholder credentials. No product-code edits. No commits/pushes against `jarvis-v5-os`. No Google endpoint contacted. No OAuth flow. No token generated. No runtime touch. No phone-side action. No CEO involvement.
+- **Missing internal asset:** AKIOR-owned Google Cloud OAuth 2.0 client registered under an AKIOR-internal Google Cloud project, delivered to this host via one of the acceptable non-interactive operator-only channels named in the handoff artifact.
+- **Next bounded task:** Deliver the missing internal asset, then re-run OPS-CRED-01. I9-OPS must NOT be rerun until OPS-CRED-01 succeeds. Google remains NOT solved.
+- **Product repo:** `jarvis-v5-os` HEAD unchanged at `1ed4f45`, chain `1ed4f45 → 7f04059 → 3817ace → 8f1b188`.
+- **Code state:** `scopes: ["operator.write"]` preserved. `deviceIdentity: null` absent. `whatsapp-send.ts` byte-identical.
+
 ## Phase 4.12B — WhatsApp Product 1 Send End-to-End Verification
 - **Date:** 2026-04-09
 - **Test type:** AKIOR → OpenClaw gateway RPC → WhatsApp send (Direction A)

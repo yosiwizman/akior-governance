@@ -1,5 +1,41 @@
 # 08_HANDOFF.md — Session Handoff State
 
+## Handoff Anchor 2026-04-09 (post OPS-CRED-01)
+
+### OPS-CRED-01 Outcome
+- Verdict: `OPS_CRED_SOURCE_BLOCKED_MISSING_AKIOR_OWNED_GOOGLE_OAUTH_CLIENT`
+- Operator-only handoff artifact: `~/.akior/ops/OPS-CRED-01-HANDOFF.md` (0600, operator-owned, outside product repo)
+- Operator-only base directory: `~/.akior/ops/` (0700, operator-owned)
+- No credentials file created. No placeholder credentials written.
+- No product-code edits. No commits/pushes against `jarvis-v5-os`. No Google endpoint contacted. No OAuth flow. No token generated. No runtime touch. No CEO involvement.
+
+### Durability (unchanged from prior anchor)
+- jarvis-v5-os: HEAD `1ed4f45` (local-only chain: `1ed4f45` → `7f04059` → `3817ace` → `8f1b188`; three local-only commits not yet pushed)
+- `scopes: ["operator.write"]` preserved, `deviceIdentity: null` absent
+- `whatsapp-send.ts` byte-identical (sha256 `37edb08f...`)
+
+### WhatsApp Product 1 — VERIFIED END-TO-END SUCCESS (unchanged)
+- Phase 4.12B: HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, CEO physical phone receipt confirmed
+- BLK-003 CLOSED. Direction A locked. No phone-side action pending.
+
+### Google Track
+- DEC-028: ACTIVE (fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials)
+- DEC-027: SUPERSEDED (OpenClaw GOG rejected)
+- DEC-029: ACTIVE (Option A for Product 1)
+- DEC-030: ACTIVE (Execution guardrail lock)
+- Google NOT solved
+- Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing
+- OPS-CRED-01 BLOCKED — missing internal asset. I9-OPS must NOT be rerun until OPS-CRED-01 succeeds.
+- Canonical product credentials target (for later I9-OPS rerun): `apps/server/data/google-credentials.json`
+
+### Next Major Task
+- Deliver the missing AKIOR-internal Google OAuth client credentials via one of the acceptable non-interactive operator-only channels
+- Then re-run OPS-CRED-01
+- I9-OPS is NOT scheduled until OPS-CRED-01 succeeds
+- No Google implementation work until after successful I9-OPS, gated by CTO approval
+
+---
+
 ## Handoff Anchor 2026-04-09 (post Phase 4.12B verified end-to-end success)
 
 ### Durability

@@ -10,7 +10,8 @@
 - **Active channel decisions:** DEC-028 (OAuth fallback), DEC-029 (Product 1 Option A), DEC-031 (Gmail browser-session), DEC-032 (WhatsApp link + send, PROVEN)
 - **Superseded:** DEC-027
 - **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit) → Phase 4.12B (VERIFIED SUCCESS)
-- **Next major step:** G-T06.D1 — Google Workspace refactor PLANNING ONLY. DEC-028 active, DEC-027 superseded, Google NOT solved.
+- **OPS-CRED-01 status:** BLOCKED — no AKIOR-internal Google OAuth client credential source available in the current operator environment. Handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md`. I9-OPS must NOT be rerun until OPS-CRED-01 succeeds.
+- **Next major step:** Deliver the missing AKIOR-internal Google OAuth client credentials via one of the acceptable non-interactive operator-only channels, then re-run OPS-CRED-01. I9-OPS is NOT scheduled until OPS-CRED-01 succeeds. Do not begin any Google implementation work. DEC-028 active, DEC-027 superseded, Google NOT solved.
 
 ## What Works
 - Chat text: Verified PASS (local qwen2.5:72b)

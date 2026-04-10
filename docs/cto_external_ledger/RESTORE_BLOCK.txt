@@ -14,7 +14,7 @@ PRODUCT REPO:
 - deviceIdentity: null absent (removed in F3).
 - Three local-only commits NOT YET PUSHED. Pushing is a separate bounded durability task.
 
-GOOGLE TRACK (UNCHANGED):
+GOOGLE TRACK:
 - DEC-028: ACTIVE (fresh browser-OAuth, AKIOR-managed credentials).
 - DEC-029: ACTIVE (Option A for Product 1).
 - DEC-027: SUPERSEDED (OpenClaw GOG rejected — no Workspace auth capability).
@@ -25,7 +25,9 @@ GOOGLE TRACK (UNCHANGED):
 - Calendar/Drive/Contacts: NOT solved.
 - G-T06.D1 plan: COMPLETE and durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md`.
 - G-T06.D2 preconditions: CLOSED. Test plan and I9-OPS definition durable in governance.
-- Next step: I9-OPS (internal credential provisioning, CTO/terminal-engineer only, NOT CEO).
+- OPS-CRED-01 ran 2026-04-09: BLOCKED — no AKIOR-internal Google OAuth client credential source available. Handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md`.
+- Next step: deliver the missing AKIOR-internal credentials, then re-run OPS-CRED-01.
+- I9-OPS must NOT be rerun until OPS-CRED-01 succeeds.
 - Then: first bounded Google implementation slice, gated by CTO approval.
 - Do NOT collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing.
 

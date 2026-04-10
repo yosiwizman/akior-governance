@@ -26,8 +26,11 @@ Google track:
 - Google NOT solved
 - G-T06.D1 plan COMPLETE and durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md`
 - G-T06.D2 preconditions CLOSED
-- Next step: I9-OPS (internal credential provisioning, CTO/terminal-engineer only)
-- Then: first bounded Google implementation slice, gated by CTO approval
+- OPS-CRED-01 ran 2026-04-09: BLOCKED — no AKIOR-internal Google OAuth client credential source available
+- Handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md`
+- Next step: deliver the missing AKIOR-internal credentials, then re-run OPS-CRED-01
+- I9-OPS must NOT be rerun until OPS-CRED-01 succeeds
+- Do not begin any Google implementation work until after successful I9-OPS
 - Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing
 
 Product repo jarvis-v5-os HEAD remains 1ed4f45 (local-only chain 1ed4f45 → 7f04059 → 3817ace → 8f1b188).
