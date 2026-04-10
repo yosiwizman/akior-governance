@@ -6,16 +6,17 @@
 
 ## CURRENT TASK
 
-**Task ID:** OPS-CRED-01 rerun (after asset delivery) → then I9-OPS
-**Status:** BLOCKED — OPS-CRED-01 completed 2026-04-09 with verdict `OPS_CRED_SOURCE_BLOCKED_MISSING_AKIOR_OWNED_GOOGLE_OAUTH_CLIENT`. Handoff artifact at `~/.akior/ops/OPS-CRED-01-HANDOFF.md`.
-**Notes:** Next major task: deliver the missing AKIOR-internal Google OAuth client credentials via one of the acceptable non-interactive operator-only channels named in `~/.akior/ops/OPS-CRED-01-HANDOFF.md`, then re-run OPS-CRED-01. I9-OPS is NOT scheduled until OPS-CRED-01 succeeds. Do not begin any Google implementation work. Do not start any OAuth flow. Do not involve the CEO. Google remains NOT solved. DEC-028 active, DEC-027 superseded. Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
+**Task ID:** Commit DEC-033 purge + test managed-browser connect flow
+**Status:** OPEN — awaiting CTO approval. GMAIL-VERIFY-01 completed 2026-04-10.
+**Notes:** DEC-033 purge exists as uncommitted working-tree changes in jarvis-v5-os. Next step: (1) commit the DEC-033 working-tree changes, (2) test the managed-browser connect flow (POST /api/browser/gmail/connect) in a bounded runtime-verification task to prove the lane can activate. GMAIL-VERIFY-01 confirmed lane is structurally intact but idle. No credential entry. No off-system credential staging. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
 
 ---
 
 ## ACTIVE DECISIONS
 - DEC-005: ACTIVE — OpenClaw built-in auth first
-- DEC-028: ACTIVE — OAuth-client architecture (fallback)
-- DEC-029: ACTIVE — Option A for Product 1 (OAuth fallback lane)
+- DEC-028: Credential-model portion SUPERSEDED by DEC-033; browser-auth-only principle still active
+- DEC-029: Credential-provisioning portion SUPERSEDED by DEC-033
+- DEC-033: ACTIVE — Google credential-model purge, browser-only inside-system auth posture
 - DEC-030: ACTIVE — Execution guardrail lock
 - DEC-031: ACTIVE AND PROVEN — Gmail via OpenClaw browser-session lane (Product 1)
 - DEC-032: ACTIVE AND PROVEN — WhatsApp link + send (Product 1). Send verified end-to-end 2026-04-09.
