@@ -1,5 +1,20 @@
 # 08_HANDOFF.md — Session Handoff State
 
+## Handoff Anchor 2026-04-10 (post BASELINE-LOCK-01) — BASELINE LOCKED
+
+### Baseline Status: LOCKED
+- Locked product anchor: `a4a8206fed48fa67281f045ee965c472d0c2b7e7`
+- State: **LOCKED** (formalized by BASELINE-LOCK-01 on 2026-04-10)
+- Prior chain: 1ed4f45 → 6195db4 (BASELINE-COMMIT-01) → a4a8206 (BASELINE-REMEDIATE-01) → LOCKED
+- BASELINE-REMEDIATE-01 corrected the settings.json scope creep from 6195db4 and enforced the two-item active queue across governance surfaces.
+- WhatsApp send lane byte-identical (sha256 37edb08f...), untouched by the entire baseline chain.
+
+### Next Bounded Tasks (frozen queue — exactly two)
+1. 3D-PRINT-QUICK-VERIFY-01 — bounded static verification of the 3D print integration against CEO-burden exit criteria
+2. GMAIL-READ-CAPABILITY-PLAN-01 — bounded written plan for minimal Gmail read capability on top of the proven session lane
+
+---
+
 ## Handoff Anchor 2026-04-10 (post BASELINE-COMMIT-01)
 
 ### Durability

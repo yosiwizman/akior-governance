@@ -8,11 +8,12 @@ WHATSAPP PRODUCT 1 SEND LANE:
 - Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
 
 PRODUCT REPO:
-- jarvis-v5-os HEAD: 6195db4a73442054f8452bf6d66947b63c0211ba
-- BASELINE-COMMIT-01 committed DEC-033 purge + holomat cleanup.
-- Prior local-only chain (1ed4f45 → 7f04059 → 3817ace → 8f1b188) is ancestor history.
+- jarvis-v5-os HEAD: a4a8206fed48fa67281f045ee965c472d0c2b7e7
+- BASELINE STATE: LOCKED (BASELINE-LOCK-01, 2026-04-10)
+- Chain: 1ed4f45 → 6195db4 (BASELINE-COMMIT-01 DEC-033 purge + holomat cleanup) → a4a8206 (BASELINE-REMEDIATE-01 settings.json scope correction) → LOCKED.
 - scopes: ["operator.write"] preserved.
 - deviceIdentity: null absent (removed in F3).
+- whatsapp-send.ts byte-identical (sha256 37edb08f...). Do NOT touch WhatsApp.
 
 GOOGLE TRACK:
 - DEC-033: ACTIVE (CEO directive 2026-04-09). Google credential model PURGED and COMMITTED.

@@ -3,6 +3,17 @@
 
 ---
 
+## LB-019 — BASELINE-LOCK-01: corrected baseline formally locked
+- **Completed:** 2026-04-10
+- **Product anchor:** a4a8206fed48fa67281f045ee965c472d0c2b7e7
+- **State:** LOCKED
+- **Queue after lock (frozen):**
+  1. 3D-PRINT-QUICK-VERIFY-01
+  2. GMAIL-READ-CAPABILITY-PLAN-01
+- **WhatsApp:** unchanged. whatsapp-send.ts sha256 `37edb08f...` byte-identical.
+- **Google:** still NOT solved as a product capability. Browser-only posture (DEC-033) active.
+- **No new feature code introduced by lock task.** Governance-only write to formalize the corrected baseline.
+
 ## LB-018 — BASELINE-REMEDIATE-01: settings.json scope correction + active queue lock
 - **Completed:** 2026-04-10
 - **Product anchor:** a4a8206fed48fa67281f045ee965c472d0c2b7e7 (one corrective commit from 6195db4)
