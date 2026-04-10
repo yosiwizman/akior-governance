@@ -25,10 +25,9 @@
 - DEC-027: SUPERSEDED
 - Google NOT solved. Browser-only posture active.
 
-### Next 3 Bounded Tasks
+### Next 2 Bounded Tasks
 1. 3D-PRINT-QUICK-VERIFY-01
 2. GMAIL-READ-CAPABILITY-PLAN-01
-3. HRM session persistence planning
 
 ---
 

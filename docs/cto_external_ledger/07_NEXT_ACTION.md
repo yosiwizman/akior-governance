@@ -8,7 +8,7 @@
 
 **Task ID:** Post-BASELINE-COMMIT-01 queue
 **Status:** OPEN — three bounded tasks queued.
-**Notes:** BASELINE-COMMIT-01 committed DEC-033 purge + holomat cleanup at 6195db4. Next 3 bounded tasks: (1) 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria. (2) GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route. (3) HRM session persistence planning alongside or immediately after task 2.
+**Notes:** BASELINE-COMMIT-01 committed DEC-033 purge + holomat cleanup; BASELINE-REMEDIATE-01 corrected settings.json scope at a4a8206. Next 2 bounded tasks: (1) 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria. (2) GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route.
 
 ---
 

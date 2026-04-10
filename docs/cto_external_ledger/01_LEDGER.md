@@ -3,6 +3,19 @@
 
 ---
 
+## LB-018 — BASELINE-REMEDIATE-01: settings.json scope correction + active queue lock
+- **Completed:** 2026-04-10
+- **Product anchor:** a4a8206fed48fa67281f045ee965c472d0c2b7e7 (one corrective commit from 6195db4)
+- **Corrective actions:**
+  - Product commit: corrected apps/server/data/settings.json to contain ONLY the legitimate DEC-033 Gmail/GoogleCalendar credential-model removals; reverted all unintended schema-normalizer drift (alexa/irobot/nest/smartLights/avatar blocks added; elevenLabs/azureTTS/spotify field expansions; localLLM model change; webSearch field additions).
+  - Governance commit: enforced the two-item active queue across 07_NEXT_ACTION.md, 08_HANDOFF.md, RESTORE_BLOCK.txt. Removed the out-of-scope third queue item.
+- **Active queue (locked):**
+  1. 3D-PRINT-QUICK-VERIFY-01 — bounded static verification of the 3D print integration against CEO-burden exit criteria
+  2. GMAIL-READ-CAPABILITY-PLAN-01 — bounded written plan for minimal Gmail read capability on top of the proven session lane
+- **WhatsApp:** Preserved byte-identical. whatsapp-send.ts untouched.
+- **Google:** Still NOT solved as a product capability. Browser-only posture (DEC-033) active.
+- **No new feature code.** Corrective-only task.
+
 ## LB-017 — BASELINE-COMMIT-01: DEC-033 purge + holomat cleanup committed
 - **Completed:** 2026-04-10
 - **Product anchor:** 6195db4a73442054f8452bf6d66947b63c0211ba

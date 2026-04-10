@@ -38,7 +38,6 @@ PROVEN WORKING:
 NEXT BOUNDED TASKS (queued):
 1. 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria.
 2. GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route.
-3. HRM session persistence planning alongside or immediately after task 2.
 
 EXECUTION GUARDRAIL (active):
 If ANY future instruction conflicts with DEC-033 or the Non-Technical User Bible:
