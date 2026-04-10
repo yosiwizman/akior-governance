@@ -6,9 +6,9 @@
 
 ## CURRENT TASK
 
-**Task ID:** Commit DEC-033 purge + test managed-browser connect flow
-**Status:** OPEN — awaiting CTO approval. GMAIL-VERIFY-01 completed 2026-04-10.
-**Notes:** DEC-033 purge exists as uncommitted working-tree changes in jarvis-v5-os. Next step: (1) commit the DEC-033 working-tree changes, (2) test the managed-browser connect flow (POST /api/browser/gmail/connect) in a bounded runtime-verification task to prove the lane can activate. GMAIL-VERIFY-01 confirmed lane is structurally intact but idle. No credential entry. No off-system credential staging. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
+**Task ID:** Post-BASELINE-COMMIT-01 queue
+**Status:** OPEN — three bounded tasks queued.
+**Notes:** BASELINE-COMMIT-01 committed DEC-033 purge + holomat cleanup at 6195db4. Next 3 bounded tasks: (1) 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria. (2) GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route. (3) HRM session persistence planning alongside or immediately after task 2.
 
 ---
 

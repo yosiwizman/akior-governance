@@ -2,41 +2,46 @@ RESTORE STATE — Read this first in any new session.
 
 WHATSAPP PRODUCT 1 SEND LANE:
 - Direction A LOCKED: AKIOR sends via OpenClaw gateway RPC (not local Baileys socket).
-- WhatsApp Product 1 send lane = VERIFIED END-TO-END SUCCESS (Phase 4.12B, 2026-04-09).
-- Evidence: HTTP 200, messageId 3EB0F0DD0CB207EF639E1C, unique test string AKIOR-W-T05-P412B-20260409T174414Z-g7U31x, CEO physical phone receipt confirmed.
+- WhatsApp Product 1 = SOLVED. Do not touch.
+- Evidence: HTTP 200, messageId 3EB0F0DD0CB207EF639E1C, CEO physical phone receipt confirmed.
 - BLK-003 CLOSED.
 - Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
 
 PRODUCT REPO:
-- jarvis-v5-os HEAD: 1ed4f45
-- Local-only chain: 1ed4f45 → 7f04059 → 3817ace → 8f1b188
+- jarvis-v5-os HEAD: 6195db4a73442054f8452bf6d66947b63c0211ba
+- BASELINE-COMMIT-01 committed DEC-033 purge + holomat cleanup.
+- Prior local-only chain (1ed4f45 → 7f04059 → 3817ace → 8f1b188) is ancestor history.
 - scopes: ["operator.write"] preserved.
 - deviceIdentity: null absent (removed in F3).
-- Three local-only commits NOT YET PUSHED. Pushing is a separate bounded durability task.
 
 GOOGLE TRACK:
-- DEC-033: ACTIVE (CEO directive 2026-04-09). Google credential model PURGED from product repo (uncommitted working-tree changes).
-- GMAIL-VERIFY-01 (2026-04-10): browser-session lane STRUCTURALLY INTACT but IDLE. Next: commit purge, test connect flow.
-- Browser-only inside-system auth posture. No credential files. No off-system credential staging.
-- DEC-028: Browser-auth principle still active; credential-model portion SUPERSEDED by DEC-033.
+- DEC-033: ACTIVE (CEO directive 2026-04-09). Google credential model PURGED and COMMITTED.
+- DEC-028: PURGED/ABANDONED — superseded by DEC-033.
 - DEC-029: Credential-provisioning portion SUPERSEDED by DEC-033.
 - DEC-027: SUPERSEDED.
 - DEC-030: ACTIVE (Execution guardrail lock).
-- DEC-031: ACTIVE AND PROVEN (Gmail browser-session connection card).
+- DEC-031: ACTIVE AND PROVEN (Gmail browser-session lane). CEO-facing surface HIDDEN until minimal read capability.
 - DEC-032: ACTIVE AND PROVEN (WhatsApp link + send).
 - OPS-CRED-01 / I9-OPS: ABANDONED by DEC-033. Do NOT revive.
-- Google read/send: NOT SOLVED. Calendar/Drive/Contacts: NOT solved.
+- Google NOT SOLVED. Calendar/Drive/Contacts: NOT solved.
 - Future Google work: browser-only, inside-system only. No clientId/clientSecret entry. No credential files.
-- No future task may ask for credential file prep, off-system credential staging, or clientId/clientSecret entry.
+
+3D PRINT:
+- Pending quick verification (3D-PRINT-QUICK-VERIFY-01 queued as next bounded task).
 
 PROVEN WORKING:
 - WhatsApp QR link (DEC-032) + WhatsApp send (Direction A) — both verified.
-- Gmail connection card (DEC-031).
+- Gmail browser-session lane (DEC-031) — PROVEN at session level, CEO surface hidden until read capability.
 - Chat via Ollama qwen2.5:72b.
-- Both repos offsite durable on GitHub (governance pushed; jarvis-v5-os has 3 local-only commits).
+- Both repos offsite durable on GitHub.
+
+NEXT BOUNDED TASKS (queued):
+1. 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria.
+2. GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route.
+3. HRM session persistence planning alongside or immediately after task 2.
 
 EXECUTION GUARDRAIL (active):
-If ANY future instruction conflicts with DEC-028, DEC-029, or the Non-Technical User Bible:
+If ANY future instruction conflicts with DEC-033 or the Non-Technical User Bible:
   - DO NOT execute the conflicting portion.
   - STOP.
   - Report the conflict using the standard correction format in 06_EXECUTION_GUARDRAILS.md.

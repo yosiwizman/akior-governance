@@ -1,5 +1,37 @@
 # 08_HANDOFF.md — Session Handoff State
 
+## Handoff Anchor 2026-04-10 (post BASELINE-COMMIT-01)
+
+### Durability
+- jarvis-v5-os: HEAD `6195db4a73442054f8452bf6d66947b63c0211ba` on main
+- BASELINE-COMMIT-01 committed: DEC-033 credential-model purge + holomat UI cleanup
+- WhatsApp send lane byte-identical, untouched by this commit
+
+### WhatsApp Product 1 — VERIFIED END-TO-END SUCCESS (unchanged)
+- Phase 4.12B: HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, CEO physical phone receipt confirmed
+- BLK-003 CLOSED. Direction A locked. whatsapp-send.ts untouched.
+
+### Gmail Product 1
+- DEC-031 browser-session lane PROVEN at session level (GMAIL-VERIFY-01 + GMAIL-CONNECT-PROOF)
+- CEO-facing surface hidden until minimal read capability is implemented
+- Gmail read/send NOT solved
+
+### 3D Print
+- Pending quick verification (3D-PRINT-QUICK-VERIFY-01 queued)
+
+### Google Track
+- DEC-033: ACTIVE (credential-model purge committed in this baseline)
+- DEC-028: SUPERSEDED by DEC-033 (purged/abandoned)
+- DEC-027: SUPERSEDED
+- Google NOT solved. Browser-only posture active.
+
+### Next 3 Bounded Tasks
+1. 3D-PRINT-QUICK-VERIFY-01
+2. GMAIL-READ-CAPABILITY-PLAN-01
+3. HRM session persistence planning
+
+---
+
 ## Handoff Anchor 2026-04-10 (post GMAIL-VERIFY-01)
 
 ### GMAIL-VERIFY-01 Outcome
