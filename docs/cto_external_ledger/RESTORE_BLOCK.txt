@@ -8,9 +8,9 @@ WHATSAPP PRODUCT 1 SEND LANE:
 - Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
 
 PRODUCT REPO:
-- jarvis-v5-os HEAD: e9f285186f2cd1cc474bff93cca0249e064e4307
+- jarvis-v5-os HEAD: e95aed32ef49cea7e2b674e097cfeaec6a6ad696
 - BASELINE STATE: LOCKED (PRODUCT-ANCHOR-ADVANCE-01, 2026-04-13)
-- Chain: 1ed4f45 → 6195db4 → a4a8206 → bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → d49d3e2 (TYPECHECK-REPAIR-01) → e1093d1 (SETTINGS-CONTRACT-RETIRE-01) → 2db8ab1 (SMOKE-PROBES-RETIRE-01) → e9f2851 (merge commit PR #114, 2026-04-13) → LOCKED.
+- Chain: 1ed4f45 → 6195db4 → a4a8206 → bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → d49d3e2 (TYPECHECK-REPAIR-01) → e1093d1 (SETTINGS-CONTRACT-RETIRE-01) → 2db8ab1 (SMOKE-PROBES-RETIRE-01) → e9f2851 (merge commit PR #114) → a32e250 (DEC033-REPAIR-01) → f6b7e36 (LLM-PROVIDER-REPAIR-01) → 949bf91 (AUTH-BRANDING-REPAIR-01) → de71306 (DEVICE-TRUST-REPAIR-01) → 2ed20a7 (GMAIL-INBOX-CI-SKIP-01) → 7cc1355 (LLM-PROVIDER-REPAIR-02) → e95aed3 (merge commit PR #115, full E2E green, 2026-04-13) → LOCKED.
 - scopes: ["operator.write"] preserved.
 - deviceIdentity: null absent (removed in F3).
 - whatsapp-send.ts byte-identical (sha256 37edb08f...). Do NOT touch WhatsApp.
