@@ -13,7 +13,7 @@
 - **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit) → Phase 4.12B (VERIFIED SUCCESS)
 - **OPS-CRED-01 / I9-OPS:** ABANDONED / SUPERSEDED by DEC-033. No off-system credential artifacts. No credential-provisioning tracks active.
 - **Hard constraints (inviolable):** no client_secret, no google-credentials.json, no refresh_token revival, no off-system credential staging, no CEO developer-console burden. Normal auth wall intact.
-- **Product anchor:** `5d8f7045130e4d8c39556af5c98a645915445b79` (PRODUCT-ANCHOR-ADVANCE-01, 2026-04-13). Three serial commits locked the verified lanes: `bc10fe3` (3D-print closure), `cf04d99` (Gmail read DEC-031 chain), `5d8f704` (E2E auth bootstrap DEC-034). Full chain: `1ed4f45 → 6195db4 → a4a8206 → bc10fe3 → cf04d99 → 5d8f704 → LOCKED`.
+- **Product anchor:** `e9f285186f2cd1cc474bff93cca0249e064e4307` (PRODUCT-ANCHOR-ADVANCE-01, merge commit for PR #114, 2026-04-13). Six lane commits + three CI-unblock follow-ups: `bc10fe3` (3D-print closure), `cf04d99` (Gmail read DEC-031 chain), `5d8f704` (E2E auth bootstrap DEC-034), `d49d3e2` (TYPECHECK-REPAIR-01), `e1093d1` (SETTINGS-CONTRACT-RETIRE-01), `2db8ab1` (SMOKE-PROBES-RETIRE-01). Full chain: `1ed4f45 → 6195db4 → a4a8206 → bc10fe3 → cf04d99 → 5d8f704 → d49d3e2 → e1093d1 → 2db8ab1 → e9f2851 (merge commit) → LOCKED`.
 - **Next major step:** Google Calendar, Drive, Contacts (future slices). All must use browser-only inside-system auth (DEC-033). No credential entry. No credential files.
 
 ## What Works

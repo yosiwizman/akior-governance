@@ -19,16 +19,16 @@ DEC-033 is active: the Google credential model is purged, browser-only inside-sy
 is in force, and the CEO has zero developer-console burden. DEC-034 documents the E2E auth bootstrap
 posture: `PLAYWRIGHT_E2E_AUTH=1` is only set in the `start:ci` npm script and is never present in
 the Dockerfile or Fly.io configuration, making it test-only and production-safe. The product repo
-anchor has been advanced to `5d8f7045130e4d8c39556af5c98a645915445b79` by PRODUCT-ANCHOR-ADVANCE-01
-(three serial commits: `bc10fe3` 3D-print closure, `cf04d99` Gmail read, `5d8f704` E2E auth bootstrap DEC-034).
+anchor has been advanced to `e9f285186f2cd1cc474bff93cca0249e064e4307` by PRODUCT-ANCHOR-ADVANCE-01
+(merge commit for PR #114 bringing six lane commits + three CI-unblock follow-ups: `bc10fe3` 3D-print, `cf04d99` Gmail read, `5d8f704` E2E auth DEC-034, `d49d3e2` typecheck-repair, `e1093d1` settings-contract-retire, `2db8ab1` smoke-probes-retire).
 The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ---
 
 ### Locked Baseline
-- Current anchor: `5d8f7045130e4d8c39556af5c98a645915445b79` (PRODUCT-ANCHOR-ADVANCE-01, 2026-04-13)
+- Current anchor: `e9f285186f2cd1cc474bff93cca0249e064e4307` (merge commit for PR #114, 2026-04-13)
 - Prior anchor: `a4a8206fed48fa67281f045ee965c472d0c2b7e7` (BASELINE-LOCK-01, 2026-04-10)
-- Lanes locked in the new anchor: 3D-print closure (`bc10fe3`), Gmail read DEC-031 chain (`cf04d99`), E2E auth bootstrap DEC-034 (`5d8f704`)
+- Lanes locked in the new anchor: 3D-print closure (`bc10fe3`), Gmail read DEC-031 chain (`cf04d99`), E2E auth bootstrap DEC-034 (`5d8f704`), typecheck repair (`d49d3e2`), settings-contract retire (`e1093d1`), smoke-probes retire (`2db8ab1`)
 - Status: **LOCKED**. Queue empty. CTO picks next bounded lane.
 
 ### Active Decisions

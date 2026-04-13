@@ -8,9 +8,9 @@ WHATSAPP PRODUCT 1 SEND LANE:
 - Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
 
 PRODUCT REPO:
-- jarvis-v5-os HEAD: 5d8f7045130e4d8c39556af5c98a645915445b79
+- jarvis-v5-os HEAD: e9f285186f2cd1cc474bff93cca0249e064e4307
 - BASELINE STATE: LOCKED (PRODUCT-ANCHOR-ADVANCE-01, 2026-04-13)
-- Chain: 1ed4f45 → 6195db4 → a4a8206 → bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → LOCKED.
+- Chain: 1ed4f45 → 6195db4 → a4a8206 → bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → d49d3e2 (TYPECHECK-REPAIR-01) → e1093d1 (SETTINGS-CONTRACT-RETIRE-01) → 2db8ab1 (SMOKE-PROBES-RETIRE-01) → e9f2851 (merge commit PR #114, 2026-04-13) → LOCKED.
 - scopes: ["operator.write"] preserved.
 - deviceIdentity: null absent (removed in F3).
 - whatsapp-send.ts byte-identical (sha256 37edb08f...). Do NOT touch WhatsApp.
@@ -35,7 +35,7 @@ PROVEN WORKING:
 - WhatsApp QR link (DEC-032) + WhatsApp send (Direction A) — both verified.
 - Gmail browser-session lane (DEC-031) — PROVEN end-to-end: backend /api/channels/gmail/{status,accounts,inbox-summary,inbox} 200 + GmailInboxList UI renders + Playwright 5/5 green on e2e/gmail-inbox.smoke.spec.ts. Locked at commit cf04d99.
 - 3D-print lane — PROVEN end-to-end: Playwright 5/5 green on e2e/3dprinters.smoke.spec.ts, real printer 3DP-22E-409 MQTT-connected. Locked at commit bc10fe3.
-- E2E auth bootstrap (DEC-034) — PROVEN: env-gated (404 when off), auth wall preserved (unauth 307 → /login), chromium-only storageState. Locked at commit 5d8f704.
+- E2E auth bootstrap (DEC-034) — PROVEN: env-gated (404 when off), auth wall preserved (unauth 307 → /login), chromium-only storageState. Locked at commit 5d8f704; merged to main via e9f2851.
 - Chat via Ollama qwen2.5:72b.
 - Both repos offsite durable on GitHub.
 
