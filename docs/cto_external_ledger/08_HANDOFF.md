@@ -19,16 +19,16 @@ DEC-033 is active: the Google credential model is purged, browser-only inside-sy
 is in force, and the CEO has zero developer-console burden. DEC-034 documents the E2E auth bootstrap
 posture: `PLAYWRIGHT_E2E_AUTH=1` is only set in the `start:ci` npm script and is never present in
 the Dockerfile or Fly.io configuration, making it test-only and production-safe. The product repo
-anchor has been advanced to `e9f285186f2cd1cc474bff93cca0249e064e4307` by PRODUCT-ANCHOR-ADVANCE-01
-(merge commit for PR #114 bringing six lane commits + three CI-unblock follow-ups: `bc10fe3` 3D-print, `cf04d99` Gmail read, `5d8f704` E2E auth DEC-034, `d49d3e2` typecheck-repair, `e1093d1` settings-contract-retire, `2db8ab1` smoke-probes-retire).
+anchor has been advanced to `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` by PR-115-E2E-FULL-GREEN-AND-ANCHOR-ROLL-01
+(merge commit for PR #115 bringing seven E2E repair commits on top of the prior PR #114 baseline: `a32e250` DEC-033-repair, `f6b7e36` llm-provider-repair-01, `949bf91` auth-branding-repair, `de71306` device-trust-repair, `2ed20a7` gmail-inbox-ci-skip, `7cc1355` llm-provider-repair-02). E2E Smoke Tests (Playwright) now fully green.
 The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ---
 
 ### Locked Baseline
-- Current anchor: `e9f285186f2cd1cc474bff93cca0249e064e4307` (merge commit for PR #114, 2026-04-13)
-- Prior anchor: `a4a8206fed48fa67281f045ee965c472d0c2b7e7` (BASELINE-LOCK-01, 2026-04-10)
-- Lanes locked in the new anchor: 3D-print closure (`bc10fe3`), Gmail read DEC-031 chain (`cf04d99`), E2E auth bootstrap DEC-034 (`5d8f704`), typecheck repair (`d49d3e2`), settings-contract retire (`e1093d1`), smoke-probes retire (`2db8ab1`)
+- Current anchor: `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` (merge commit for PR #115, 2026-04-13, E2E full green)
+- Prior anchor: `e9f285186f2cd1cc474bff93cca0249e064e4307` (PRODUCT-ANCHOR-ADVANCE-01, PR #114 merge, 2026-04-13)
+- Lanes locked by PR #115: DEC-033 settings-spec retirement (`a32e250`), llm-provider cluster repair (`f6b7e36` + `7cc1355`), auth + branding anonymous-context repair (`949bf91`), device-trust serveEnabled shape alignment (`de71306`), gmail-inbox CI-skip guard (`2ed20a7`). E2E Smoke Tests (Playwright) CI job now fully green (99 passed / 0 failed).
 - Status: **LOCKED**. Queue empty. CTO picks next bounded lane.
 
 ### Active Decisions
