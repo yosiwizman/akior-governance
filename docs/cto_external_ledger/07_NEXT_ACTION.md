@@ -6,9 +6,44 @@
 
 ## CURRENT TASK
 
-**Task ID:** Commit DEC-033 purge + test managed-browser connect flow
-**Status:** OPEN — awaiting CTO approval. GMAIL-VERIFY-01 completed 2026-04-10.
-**Notes:** DEC-033 purge exists as uncommitted working-tree changes in jarvis-v5-os. Next step: (1) commit the DEC-033 working-tree changes, (2) test the managed-browser connect flow (POST /api/browser/gmail/connect) in a bounded runtime-verification task to prove the lane can activate. GMAIL-VERIFY-01 confirmed lane is structurally intact but idle. No credential entry. No off-system credential staging. WhatsApp send lane is closed (VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED).
+**Task ID:** PRODUCT-ANCHOR-ADVANCE-01
+**Status:** CLOSED — 2026-04-13 (post-PR#114-merge update). Product anchor advanced to `e9f285186f2cd1cc474bff93cca0249e064e4307` (merge commit for PR #114). Chain: `bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → d49d3e2 (TYPECHECK-REPAIR-01) → e1093d1 (SETTINGS-CONTRACT-RETIRE-01) → 2db8ab1 (SMOKE-PROBES-RETIRE-01) → e9f2851 (merge commit) → LOCKED`. Governance ratified in parallel.
+**Current queue:** EMPTY. Next bounded lane to be chosen by CTO.
+**Notes:** Prior frozen queue (3D-PRINT-QUICK-VERIFY-01, GMAIL-READ-CAPABILITY-PLAN-01) RETIRED — both CLOSED. GMAIL-READ-INBOX-01/02/03 chain CLOSED / VERIFIED (see 03_STATUS.md). Product repo carries uncommitted changes across three verified lanes (3D-print closure, Gmail read implementation, E2E auth bootstrap). This task locks those changes into a new baseline product anchor.
+
+### INSTRUCTION BLOCK
+
+```
+Bounded task: PRODUCT-ANCHOR-ADVANCE-01
+Date: 2026-04-13
+
+Scope:
+1. Review the full uncommitted diff in ~/projects/akior/forge/jarvis-v5-os.
+2. Commit changes in small, governance-disciplined commits — one per verified lane:
+   - Lane A: 3D-print closure
+   - Lane B: Gmail read implementation
+   - Lane C: E2E auth bootstrap
+   Do NOT create a single mega-commit.
+3. Any uncommitted file that does not map to a verified lane must be either
+   ratified (committed with explicit lane assignment) or reverted explicitly.
+   No silent adoption.
+4. After all lane commits land, record the new HEAD SHA as the product anchor
+   in RESTORE_BLOCK.txt and 03_STATUS.md.
+5. Do NOT add new features. Do NOT re-run verification. Verification is
+   already binary-closed for all three lanes.
+
+Out of scope:
+- WhatsApp, 3D-print behavior changes, Gmail read behavior changes (all closed)
+- Google credential revival
+- Cloud / Light product expansion
+- New external integrations
+
+Success criteria:
+- Product repo HEAD advances to a single locked SHA
+- RESTORE_BLOCK.txt and 03_STATUS.md updated with the new anchor SHA
+- No new product code introduced in this lock task
+- Every committed file maps to a named verified lane
+```
 
 ---
 
@@ -30,9 +65,18 @@
 
 ---
 
+## AFTER THIS TASK
+
+Queue is empty after PRODUCT-ANCHOR-ADVANCE-01 completes. CTO chooses the next bounded lane. Candidates (CTO picks — not Claude): Gmail inbox polish, AKIOR Light scoping, holomat follow-ups.
+
+---
+
 ## ARCHIVED CHAINS
 
-### G-T06 Gmail Chain (COMPLETE)
+### Gmail Read Chain (COMPLETE — VERIFIED)
+GMAIL-READ-INBOX-01 (backend route) → GMAIL-READ-INBOX-02 (UI integration) → GMAIL-READ-INBOX-03 (E2E auth bootstrap) — all CLOSED.
+
+### G-T06 Gmail Channel Chain (COMPLETE)
 Implementation: I1→I2→I3→I4→I4-AMEND-1→I5→I6→I7→I8→SPIKE→ACCEPTANCE→UI-CHANNELS-NAV
 
 ### WhatsApp Discovery Chain (COMPLETE)

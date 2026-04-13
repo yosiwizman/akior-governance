@@ -1,104 +1,140 @@
 # 08_HANDOFF.md — Session Handoff State
-
-## Handoff Anchor 2026-04-10 (post GMAIL-VERIFY-01)
-
-### GMAIL-VERIFY-01 Outcome
-- Verdict: `BROWSER_SESSION_EXISTS_ONLY`
-- DEC-031 browser-session lane structurally intact: 2 routes, handler chain traces to OpenClaw port 18791
-- Backend online on port 3002; single probe HTTP 200, `{running:false, gmailOpen:false, title:null}`
-- Managed browser not running, no active Gmail session — lane is idle
-- Bible-compliance sweep: 1 REMOVE (test-email-notifications page), 1 REPLACE_LATER (CLAUDE.md:56), 4 KEEP
-- No new Google code, no credential files, no runtime bring-up, no WhatsApp touch
-
-### Next Steps
-1. Commit DEC-033 working-tree changes (uncommitted purge)
-2. Test managed-browser connect flow (POST /api/browser/gmail/connect) in bounded runtime-verification task
+# Last updated: 2026-04-13
 
 ---
 
-## Handoff Anchor 2026-04-09 (post DEC-033 credential-model purge)
+## Handoff Anchor 2026-04-13 — GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP COMPLETE
 
-### DEC-033 Outcome
-- Google credential model PURGED from product repo
-- Deleted: gmailClient.ts, googleCalendarClient.ts, email-notifications.ts, OAUTH_SETUP_GUIDE.md, AGENT_C_IMPLEMENTATION_PLAN.md
-- Surgically removed: all /api/integrations/gmail/*, /api/integrations/google-calendar/*, /api/auth/google/* routes; loadGoogleCredentials/loadGoogleTokens; GOOGLE_CLIENT_ID/SECRET env vars; Gmail/GoogleCalendar settings schemas, defaults, UI config cards
-- Preserved: /api/browser/gmail/* (browser-session shell), browserGmailStatus(), Gmail/Calendar browser-only UI placeholders
-- OPS-CRED-01 / I9-OPS credential-provisioning tracks: ABANDONED by CEO directive
-- Operator-side artifacts deleted: ~/.akior/ops/OPS-CRED-01-HANDOFF.md
-- No off-system credential artifacts remain
+### Current Posture (read before any new CTO session)
 
-### WhatsApp Product 1 — VERIFIED END-TO-END SUCCESS (unchanged)
-- Phase 4.12B: HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, CEO physical phone receipt confirmed
-- BLK-003 CLOSED. Direction A locked. whatsapp-send.ts untouched.
-
-### Google Track
-- DEC-033: ACTIVE (credential-model purge, browser-only inside-system auth posture)
-- DEC-028: Browser-auth-only principle still active; credential-model implementation SUPERSEDED by DEC-033
-- DEC-027: SUPERSEDED
-- DEC-030: ACTIVE (Execution guardrail lock)
-- Gmail read/send NOT solved. Calendar/Drive/Contacts NOT solved.
-- Future Google work: browser-only, inside-system only. No credential files. No off-system credential staging.
-
-### Next Major Task
-- Future Google work scoped by CTO under DEC-033 browser-only posture
-- No credential entry. No credential files. No off-system credential staging.
+AKIOR is a personal AI chief of staff (non-technical CEO, no developer-console burden ever).
+WhatsApp Product 1 is solved end-to-end (DEC-032, verified 2026-04-09) — the send lane and QR link are
+byte-locked and must not be touched for any reason. The 3D-print lane is closed and verified
+(3D-PRINT-STRICT-CLOSURE-01) — no further verification, no re-opening. The Gmail read lane is now
+closed end-to-end (GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP): the backend inbox route is live, the
+`GmailInboxList` UI component mounts deterministically, the Playwright smoke suite
+`e2e/gmail-inbox.smoke.spec.ts` runs 5/5 green, and the auth wall is preserved for real users
+(Firefox and WebKit projects remain unauthenticated — they prove the middleware is not weakened).
+DEC-033 is active: the Google credential model is purged, browser-only inside-system auth posture
+is in force, and the CEO has zero developer-console burden. DEC-034 documents the E2E auth bootstrap
+posture: `PLAYWRIGHT_E2E_AUTH=1` is only set in the `start:ci` npm script and is never present in
+the Dockerfile or Fly.io configuration, making it test-only and production-safe. The product repo
+anchor has been advanced to `e9f285186f2cd1cc474bff93cca0249e064e4307` by PRODUCT-ANCHOR-ADVANCE-01
+(merge commit for PR #114 bringing six lane commits + three CI-unblock follow-ups: `bc10fe3` 3D-print, `cf04d99` Gmail read, `5d8f704` E2E auth DEC-034, `d49d3e2` typecheck-repair, `e1093d1` settings-contract-retire, `2db8ab1` smoke-probes-retire).
+The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ---
 
-## Handoff Anchor 2026-04-09 (post Phase 4.12B verified end-to-end success)
+### Locked Baseline
+- Current anchor: `e9f285186f2cd1cc474bff93cca0249e064e4307` (merge commit for PR #114, 2026-04-13)
+- Prior anchor: `a4a8206fed48fa67281f045ee965c472d0c2b7e7` (BASELINE-LOCK-01, 2026-04-10)
+- Lanes locked in the new anchor: 3D-print closure (`bc10fe3`), Gmail read DEC-031 chain (`cf04d99`), E2E auth bootstrap DEC-034 (`5d8f704`), typecheck repair (`d49d3e2`), settings-contract retire (`e1093d1`), smoke-probes retire (`2db8ab1`)
+- Status: **LOCKED**. Queue empty. CTO picks next bounded lane.
 
-### Durability
-- jarvis-v5-os: HEAD `1ed4f45` (local-only chain: `1ed4f45` → `7f04059` → `3817ace` → `8f1b188`; three local-only commits not yet pushed)
-- akior-governance: reconciled and pushed with Phase 4.13 governance refresh
-- `scopes: ["operator.write"]` preserved, `deviceIdentity: null` absent
+### Active Decisions
+| Decision | Status | Notes |
+|---|---|---|
+| DEC-005 | ACTIVE | OpenClaw built-in auth first |
+| DEC-031 | ACTIVE AND PROVEN | Gmail via OpenClaw browser-session lane |
+| DEC-032 | ACTIVE AND PROVEN | WhatsApp link + send, verified 2026-04-09 |
+| DEC-033 | ACTIVE | Credential-model purge, browser-only posture |
+| DEC-034 | ACTIVE | E2E auth bootstrap: env-gated, test-only, production-safe |
+| DEC-030 | ACTIVE | Execution guardrail lock |
+| DEC-028 | SUPERSEDED (credential model) | Browser-auth-only principle still honored via DEC-033 |
+| DEC-029 | SUPERSEDED | Credential-provisioning track abandoned |
+| DEC-027 | SUPERSEDED | OpenClaw GOG rejected |
 
-### WhatsApp Product 1 — VERIFIED END-TO-END SUCCESS
-- Phase 4.12B bounded runtime recovery + one controlled send returned HTTP 200 with messageId `3EB0F0DD0CB207EF639E1C`
-- Unique test string `AKIOR-W-T05-P412B-20260409T174414Z-g7U31x` physically received on CEO phone
-- Gateway remained active post-send; listener remained connected
-- BLK-003 CLOSED
-- Direction A locked: AKIOR sends WhatsApp via OpenClaw gateway RPC (not local Baileys)
-- No phone-side action pending; do not unlink, relink, disconnect, reconnect, or scan QR
+### Active Blockers
+- BLK-001: RESOLVED 2026-04-08
+- BLK-002: RESOLVED (Gmail connection card proven; read lane now closed)
+- BLK-003: CLOSED 2026-04-09 — WhatsApp Product 1 end-to-end verified
+- BLK-004: ACTIVE (Product 2 only — does not block Product 1)
 
-### Gmail Product 1
-- DEC-031 ACTIVE AND PROVEN (Gmail browser-session connection card)
-- Gmail read/send NOT solved (no API tokens)
+---
 
-### Google Track (unchanged)
-- DEC-028: ACTIVE (fresh Jarvis V5 OS browser-OAuth with AKIOR-managed server-side credentials)
-- DEC-027: SUPERSEDED (OpenClaw GOG rejected)
-- DEC-029: ACTIVE (Option A for Product 1)
-- DEC-030: ACTIVE (Execution guardrail lock)
-- Google NOT solved
-- Do not collapse OpenClaw GOG skill / gog CLI / Claude Code MCP into one thing
+## Closed Lanes (do not reopen)
 
-### Proven Working
+### WhatsApp Product 1 — CLOSED AND LOCKED
+- QR link solved (DEC-032, 2026-04-08)
+- Send lane solved: HTTP 200, messageId `3EB0F0DD0CB207EF639E1C`, CEO physical phone receipt confirmed
+- `whatsapp-send.ts` sha256 `37edb08f...` — byte-identical, untouched
+- Do NOT retry send, suggest phone-side action, unlink, relink, disconnect, reconnect, or scan QR
+
+### 3D-Print Lane — CLOSED AND VERIFIED
+- Closed by: 3D-PRINT-STRICT-CLOSURE-01
+- Verification: integration reviewed against CEO-burden exit criteria — passes
+- Do NOT reopen, re-verify, or add new 3D-print routes
+
+### Gmail Read Lane — CLOSED AND VERIFIED (GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP)
+- Backend inbox route: `apps/server/src/routes/auth.routes.ts` lines ~252-294
+- UI component: `GmailInboxList` mounts deterministically in the Channels settings page
+- Playwright smoke: `e2e/gmail-inbox.smoke.spec.ts` — 5/5 green
+- Evidence screenshot: `test-results/gmail-inbox-smoke.png` (product repo)
+- Auth wall intact: Firefox and WebKit Playwright projects run unauthenticated, hit the 401 wall
+- Env-gate verified: with `PLAYWRIGHT_E2E_AUTH` unset → route returns 404 (not a production flag)
+- Playwright globalSetup: `e2e/global-setup.ts`
+- Runtime storageState: `e2e/.auth/admin.json` (gitignored, not committed)
+
+---
+
+## Hard Constraints — DO NOT VIOLATE
+
+1. **No CEO developer-console burden** — the CEO never sees, types, or pastes a clientId, clientSecret, API key, credential file path, or OAuth token. Zero terminal instructions to the CEO.
+2. **No credential files** — no `client_secret.json`, no `google-credentials.json`, no refresh token files of any kind.
+3. **No WhatsApp touch** — the send lane is byte-locked. Do not modify, test, re-verify, or refactor it.
+4. **No middleware weakening for real users** — the auth middleware must reject unauthenticated requests in production. Firefox/WebKit Playwright projects must remain unauthenticated.
+5. **`PLAYWRIGHT_E2E_AUTH=1` is test-only** — never add this flag to Dockerfile, Fly.io config, or any production startup path.
+6. **No new Google OAuth surfaces** — DEC-033 is active; browser-only posture is locked. No `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, or consent-screen setup.
+7. **Do not reopen DEC-033** — the credential-model purge is final. Any proposal to re-introduce server-side Google credentials is a Bible violation.
+
+---
+
+## Active Next Task
+
+**`PRODUCT-ANCHOR-ADVANCE-01`** — Commit the verified 3D-print closure and Gmail read E2E lanes into a new product anchor commit on `main`. See `07_NEXT_ACTION.md` for the copy-paste instruction block.
+
+Steps expected:
+1. Stage all verified, uncommitted working-tree changes in the product repo
+2. Commit with a bounded message referencing 3D-PRINT-STRICT-CLOSURE-01 and GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP
+3. Record new HEAD sha in `03_STATUS.md` and update the baseline anchor reference
+4. Update `07_NEXT_ACTION.md` to the next queued task after anchor lock
+
+---
+
+## Explicitly DO NOT
+
+- Restart from the stale "Gmail UI blocked" or "Gmail read pending" state — that state is closed
+- Re-run or re-verify the 3D-print integration — that lane is closed
+- Reopen DEC-033 or propose any Google credential provisioning
+- Add new Google OAuth surfaces (Calendar, Drive, Contacts) without a new bounded CTO decision
+- Treat `PLAYWRIGHT_E2E_AUTH=1` as a production flag — it is only valid in `start:ci`
+- Modify `whatsapp-send.ts` or suggest any WhatsApp phone-side action
+- Push to Fly.io or trigger a production deploy without explicit CTO approval
+
+---
+
+## Proven Working (full list)
+
 - WhatsApp QR link via AKIOR UI (DEC-032) — verified 2026-04-08
 - WhatsApp send via AKIOR → OpenClaw gateway RPC (Direction A) — verified 2026-04-09
-- Gmail browser-session connection card (DEC-031) — verified prior
+- 3D-print integration — verified closed (3D-PRINT-STRICT-CLOSURE-01)
+- Gmail read lane end-to-end — verified (GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP)
+- Gmail browser-session connection card (DEC-031) — proven prior
 - Chat text via local qwen2.5:72b on Ollama
 - DND toggle, Contacts CRUD, Tasks CRUD
 - Git push to GitHub (both repos)
 - Governance hooks (cc-safe-setup 8 hooks)
 
-### Next Major Task
-- G-T06.D1 — Google Workspace refactor PLANNING ONLY
-- No implementation. No OAuth flow start. No Google code changes.
+---
 
-## Restore Checklist
-1. Read RESTORE_BLOCK.txt first
-2. Confirm WhatsApp send lane = VERIFIED END-TO-END SUCCESS, BLK-003 CLOSED
-3. Do NOT retry WhatsApp send or suggest phone-side action
-4. Confirm DEC-028 active, DEC-027 superseded, Google NOT solved
-5. Confirm next task = G-T06.D1 planning only (no implementation)
-6. Do NOT reopen Phases 0 through 4.12B
-7. Do NOT push jarvis-v5-os (three local-only commits remain; pushing is a separate bounded task)
+## Restore Checklist (new CTO session)
 
-### Google Planning (G-T06.D1 + D2 complete)
-- G-T06.D1 plan artifact durable at `plans/google/G-T06-D1_GOOGLE_WORKSPACE_REFACTOR_PLAN.md` (sha256 `ef66430f...`)
-- G-T06.D2 preconditions closed: D1 durable, I9-OPS defined + scheduled, DELETE refs analyzed, REWRITE test plan produced
-- I9-OPS: scheduled as separate bounded CTO task (provisions `data/google-credentials.json` server-side)
-- Google remains NOT solved until I9-OPS + implementation + end-user flow proven
-
-## Prior Handoff (superseded)
-- Prior handoff anchor 2026-04-09 (pre Phase 4.12B) said WhatsApp send NOT SOLVED and Phase 4.6 was next. That is now superseded by the verified success above.
+1. Read `RESTORE_BLOCK.txt` first
+2. Read `05_DECISIONS.md` for DEC-033, DEC-034, DEC-032
+3. Confirm WhatsApp = VERIFIED, BLK-003 CLOSED — do not touch
+4. Confirm 3D-print = CLOSED via 3D-PRINT-STRICT-CLOSURE-01 — do not reopen
+5. Confirm Gmail read = CLOSED via GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP — do not reopen
+6. Confirm DEC-033 ACTIVE — no credential files, no CEO Google console burden
+7. Confirm DEC-034 ACTIVE — `PLAYWRIGHT_E2E_AUTH=1` is test-only
+8. Next task = PRODUCT-ANCHOR-ADVANCE-01 (anchor commit only)
+9. Do NOT reopen any closed lane or prior phase

@@ -3,6 +3,56 @@
 
 ---
 
+## LB-019 — BASELINE-LOCK-01: corrected baseline formally locked
+- **Completed:** 2026-04-10
+- **Product anchor:** a4a8206fed48fa67281f045ee965c472d0c2b7e7
+- **State:** LOCKED
+- **Queue after lock (frozen):**
+  1. 3D-PRINT-QUICK-VERIFY-01
+  2. GMAIL-READ-CAPABILITY-PLAN-01
+- **WhatsApp:** unchanged. whatsapp-send.ts sha256 `37edb08f...` byte-identical.
+- **Google:** still NOT solved as a product capability. Browser-only posture (DEC-033) active.
+- **No new feature code introduced by lock task.** Governance-only write to formalize the corrected baseline.
+
+## LB-018 — BASELINE-REMEDIATE-01: settings.json scope correction + active queue lock
+- **Completed:** 2026-04-10
+- **Product anchor:** a4a8206fed48fa67281f045ee965c472d0c2b7e7 (one corrective commit from 6195db4)
+- **Corrective actions:**
+  - Product commit: corrected apps/server/data/settings.json to contain ONLY the legitimate DEC-033 Gmail/GoogleCalendar credential-model removals; reverted all unintended schema-normalizer drift (alexa/irobot/nest/smartLights/avatar blocks added; elevenLabs/azureTTS/spotify field expansions; localLLM model change; webSearch field additions).
+  - Governance commit: enforced the two-item active queue across 07_NEXT_ACTION.md, 08_HANDOFF.md, RESTORE_BLOCK.txt. Removed the out-of-scope third queue item.
+- **Active queue (locked):**
+  1. 3D-PRINT-QUICK-VERIFY-01 — bounded static verification of the 3D print integration against CEO-burden exit criteria
+  2. GMAIL-READ-CAPABILITY-PLAN-01 — bounded written plan for minimal Gmail read capability on top of the proven session lane
+- **WhatsApp:** Preserved byte-identical. whatsapp-send.ts untouched.
+- **Google:** Still NOT solved as a product capability. Browser-only posture (DEC-033) active.
+- **No new feature code.** Corrective-only task.
+
+## LB-017 — BASELINE-COMMIT-01: DEC-033 purge + holomat cleanup committed
+- **Completed:** 2026-04-10
+- **Product anchor:** 6195db4a73442054f8452bf6d66947b63c0211ba
+- **Action:** Committed DEC-033 credential-model purge and holomat cleanup/repair to jarvis-v5-os main as a single baseline commit (18 files: 8 deleted, 10 modified).
+- **Lanes committed:**
+  - DEC-033 Google credential-model purge (credential-file loading, googleapis routes, OAuth flow deleted)
+  - Holomat cleanup (test-email-notifications page, EmailApp, CalendarApp deleted; holomat/page.tsx repaired; CLAUDE.md updated)
+- **WhatsApp:** Preserved byte-identical. whatsapp-send.ts untouched. DEC-032 PROVEN status unchanged.
+- **Gmail:** DEC-031 browser-session lane PROVEN at session level (GMAIL-VERIFY-01 + GMAIL-CONNECT-PROOF). CEO-facing surface hidden until minimal read capability exists.
+- **3D print:** Pending quick verification (3D-PRINT-QUICK-VERIFY-01 queued).
+- **Google:** NOT solved. Browser-only posture (DEC-033) active. No credential files. No off-system credential staging.
+- **No new feature code.** This is a durability/cleanup commit only.
+
+## LB-016 — DEC-033 Google Credential-Model Purge
+- **Completed:** 2026-04-09
+- **Source:** CEO directive — remove Google credential model completely
+- **Decision added:** DEC-033
+- **Actions taken:**
+  - Deleted: gmailClient.ts, googleCalendarClient.ts, email-notifications.ts, OAUTH_SETUP_GUIDE.md, AGENT_C_IMPLEMENTATION_PLAN.md
+  - Surgically edited: index.ts, settingsContract.ts, integrations.ts (shared), settings/page.tsx, settings.json, .env.example (×2), .gitignore
+  - Removed operator artifact: ~/.akior/ops/OPS-CRED-01-HANDOFF.md
+  - OPS-CRED-01 / I9-OPS marked ABANDONED
+  - All governance active-state files updated to reflect DEC-033
+- **Preserved:** Browser-session Gmail routes (/api/browser/gmail/*), browser-only UI shells
+- **Posture:** Browser-only inside-system auth. No credential files. No off-system credential staging. No clientId/clientSecret entry flow.
+
 ## LB-015 — W-T05 Phase 4.5 audit recharacterized the blocker as device pairing at gateway handshake
 - **Completed:** 2026-04-09
 - **Repo under audit:** OpenClaw gateway runtime / local environment
