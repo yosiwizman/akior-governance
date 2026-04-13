@@ -8,37 +8,40 @@ WHATSAPP PRODUCT 1 SEND LANE:
 - Do NOT retry WhatsApp send. Do NOT suggest phone-side action. Do NOT reopen Phases 0-4.12B.
 
 PRODUCT REPO:
-- jarvis-v5-os HEAD: a4a8206fed48fa67281f045ee965c472d0c2b7e7
-- BASELINE STATE: LOCKED (BASELINE-LOCK-01, 2026-04-10)
-- Chain: 1ed4f45 → 6195db4 (BASELINE-COMMIT-01 DEC-033 purge + holomat cleanup) → a4a8206 (BASELINE-REMEDIATE-01 settings.json scope correction) → LOCKED.
+- jarvis-v5-os HEAD: 5d8f7045130e4d8c39556af5c98a645915445b79
+- BASELINE STATE: LOCKED (PRODUCT-ANCHOR-ADVANCE-01, 2026-04-13)
+- Chain: 1ed4f45 → 6195db4 → a4a8206 → bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → LOCKED.
 - scopes: ["operator.write"] preserved.
 - deviceIdentity: null absent (removed in F3).
 - whatsapp-send.ts byte-identical (sha256 37edb08f...). Do NOT touch WhatsApp.
 
 GOOGLE TRACK:
-- DEC-033: ACTIVE (CEO directive 2026-04-09). Google credential model PURGED and COMMITTED.
 - DEC-028: PURGED/ABANDONED — superseded by DEC-033.
 - DEC-029: Credential-provisioning portion SUPERSEDED by DEC-033.
 - DEC-027: SUPERSEDED.
 - DEC-030: ACTIVE (Execution guardrail lock).
-- DEC-031: ACTIVE AND PROVEN (Gmail browser-session lane). CEO-facing surface HIDDEN until minimal read capability.
+- DEC-031: ACTIVE AND PROVEN (Gmail browser-session lane). Read capability CLOSED end-to-end (GMAIL-READ-INBOX-03). CEO-facing surface LIVE.
 - DEC-032: ACTIVE AND PROVEN (WhatsApp link + send).
+- DEC-033: ACTIVE. Google credential-model purge; browser-only posture. Undefeated.
+- DEC-034: ACTIVE (2026-04-13). Test-only E2E auth bootstrap for Playwright — env-gated by PLAYWRIGHT_E2E_AUTH=1 in start:ci only; returns 404 in production; cookie plumbing identical to /api/auth/pin/login; middleware unchanged. Does NOT defeat DEC-033.
 - OPS-CRED-01 / I9-OPS: ABANDONED by DEC-033. Do NOT revive.
 - Google NOT SOLVED. Calendar/Drive/Contacts: NOT solved.
 - Future Google work: browser-only, inside-system only. No clientId/clientSecret entry. No credential files.
 
 3D PRINT:
-- Pending quick verification (3D-PRINT-QUICK-VERIFY-01 queued as next bounded task).
+- CLOSED — VERIFIED in 3D-PRINT-STRICT-CLOSURE-01 (Playwright 5/5 green on e2e/3dprinters.smoke.spec.ts). Locked at commit bc10fe3.
 
 PROVEN WORKING:
 - WhatsApp QR link (DEC-032) + WhatsApp send (Direction A) — both verified.
-- Gmail browser-session lane (DEC-031) — PROVEN at session level, CEO surface hidden until read capability.
+- Gmail browser-session lane (DEC-031) — PROVEN end-to-end: backend /api/channels/gmail/{status,accounts,inbox-summary,inbox} 200 + GmailInboxList UI renders + Playwright 5/5 green on e2e/gmail-inbox.smoke.spec.ts. Locked at commit cf04d99.
+- 3D-print lane — PROVEN end-to-end: Playwright 5/5 green on e2e/3dprinters.smoke.spec.ts, real printer 3DP-22E-409 MQTT-connected. Locked at commit bc10fe3.
+- E2E auth bootstrap (DEC-034) — PROVEN: env-gated (404 when off), auth wall preserved (unauth 307 → /login), chromium-only storageState. Locked at commit 5d8f704.
 - Chat via Ollama qwen2.5:72b.
 - Both repos offsite durable on GitHub.
 
-NEXT BOUNDED TASKS (queued):
-1. 3D-PRINT-QUICK-VERIFY-01 — static verification of 3D print integration against CEO-burden exit criteria.
-2. GMAIL-READ-CAPABILITY-PLAN-01 — plan (not implement) the minimal Gmail read route.
+NEXT BOUNDED TASK:
+- Empty. PRODUCT-ANCHOR-ADVANCE-01 is the current anchor commit. CTO picks the next bounded lane.
+- Prior queue retired: 3D-PRINT-QUICK-VERIFY-01 (CLOSED), GMAIL-READ-CAPABILITY-PLAN-01 (CLOSED), GMAIL-READ-INBOX-01/02/03 (CLOSED), GMAIL-READ-INBOX-04 (CLOSED).
 
 EXECUTION GUARDRAIL (active):
 If ANY future instruction conflicts with DEC-033 or the Non-Technical User Bible:

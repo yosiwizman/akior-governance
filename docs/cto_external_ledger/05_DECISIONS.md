@@ -81,4 +81,58 @@
 
 ---
 
-**Execution confirmation 2026-04-09:** Direction A (AKIOR → OpenClaw gateway RPC) is now proven end-to-end for WhatsApp Product 1. See 04_TEST_LOG.md Phase 4.12B entry for evidence. DEC-031 (Gmail via OpenClaw managed-browser lane) and DEC-032 (WhatsApp via direct Node import of OpenClaw core functions) remain active. DEC-028 remains active and DEC-027 remains superseded. Google track is unchanged.
+**Execution confirmation 2026-04-09:** Direction A (AKIOR → OpenClaw gateway RPC) is now proven end-to-end for WhatsApp Product 1. See 04_TEST_LOG.md Phase 4.12B entry for evidence. DEC-031 (Gmail via OpenClaw managed-browser lane) and DEC-032 (WhatsApp via direct Node import of OpenClaw core functions) remain active. DEC-028 credential-model portion superseded by DEC-033. DEC-027 remains superseded. Google track updated per DEC-033.
+
+## DEC-033 — Google Credential-Model Purge; Browser-Only Inside-System Auth Posture
+- **Status:** ACTIVE — CEO directive, locked
+- **Date:** 2026-04-09
+- **Source:** CEO directive: "Remove the Google credential model completely so it stops reappearing."
+- **Decision:**
+  1. Google credential model is PURGED from the product repo. All clientId/clientSecret form fields, google-credentials.json references, GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET env vars, direct googleapis/google-auth-library auth paths, and the custom OAuth callback/token storage path are deleted.
+  2. No off-system Google credential artifacts (OPS-CRED-01 handoff, operator-side credential files, credential-import files). These are deleted and must not be recreated.
+  3. OPS-CRED-01 and I9-OPS credential-provisioning tracks are ABANDONED / SUPERSEDED by this directive.
+  4. Browser-only Google auth posture for CEO/end user. No credential entry flow. No clientId/clientSecret form. No developer-console burden.
+  5. Browser-facing Google UI shells (connect buttons, status indicators, channel cards) are preserved only if they do NOT depend on the deleted credential model.
+  6. Future Google work must be inside-system and browser-first only. No off-system credential staging. No credential files at user or operator side.
+  7. No future task may ask for clientId/clientSecret entry, credential file prep, or external credential staging.
+- **Relation to DEC-028:** DEC-028's browser-auth-only and no-end-user-secrets principles remain active. DEC-028's credential-model implementation path (AKIOR-managed server-side clientId/clientSecret) is superseded by DEC-033.
+- **Relation to DEC-029:** DEC-029's "CEO registers OAuth app" credential provisioning is superseded by DEC-033.
+- **Scope:** All products, all Google services.
+- **Non-Technical Bible compliance:** Zero terminal, zero config files, zero JSON, zero API keys typed by hand, zero developer-console steps for the CEO.
+
+## DEC-034 — E2E Authenticated-Session Bootstrap for Protected-Route Playwright (Test-Only)
+- **Status:** ACTIVE — governs Playwright E2E access to protected `/settings/**` routes. Does NOT defeat DEC-033.
+- **Date:** 2026-04-13
+- **Source:** GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP task (verified 2026-04-13).
+
+### Summary
+Protected admin routes (`/settings/**`) are gated by `apps/web/middleware.ts` PIN-auth. Playwright cannot reach those routes in a fresh browser context. DEC-034 ratifies a minimum, test-only, env-gated server route plus a Playwright `globalSetup` that mints a real admin session cookie for the E2E chromium project ONLY. Normal users, Firefox/WebKit Playwright projects, Docker/Fly production, and all other callers remain unauthenticated by default.
+
+### Binding Invariants
+1. Server route `POST /api/auth/e2e/bootstrap` returns HTTP 404 unless `process.env.PLAYWRIGHT_E2E_AUTH === "1"`.
+2. `PLAYWRIGHT_E2E_AUTH=1` is set ONLY in `package.json` `start:ci` (the Playwright/local-dev harness); NOT in `apps/server/Dockerfile`, `apps/server/fly.toml`, `deploy/**`, nor any CI workflow.
+3. Cookie plumbing is identical to `POST /api/auth/pin/login` — `rotateSessionToken()` + `rotateCsrfToken()` + `SESSION_COOKIE_OPTIONS` (httpOnly, secure, sameSite=strict). No weaker cookie settings are permitted.
+4. Middleware (`apps/web/middleware.ts`) is NOT modified. Real users without an admin session still 307-redirect to `/login?next=…`.
+5. Playwright `globalSetup` (`e2e/global-setup.ts`) POSTs to the bootstrap route and saves `storageState` to `e2e/.auth/admin.json`. Only the **chromium** project in `playwright.config.ts` consumes this `storageState`. Firefox and WebKit projects start cold, redirect to `/login`, and serve as auth-wall integrity witnesses.
+6. No Google credentials. No OAuth. No `client_secret`, `google-credentials.json`, `GOOGLE_CLIENT_ID/SECRET`, `refresh_token`, `googleapis`, `OAuth2Client`, `gmailClient`, or any similar credential artifact.
+7. No PIN value is embedded or required anywhere in product code. The bootstrap does not read or set the owner PIN.
+
+### Live Proof of Preservation (Evidence Tier)
+- `PLAYWRIGHT_E2E_AUTH=1` → `POST /api/auth/e2e/bootstrap` returns HTTP 200 + admin session cookie
+- `PLAYWRIGHT_E2E_AUTH` unset / not `"1"` → `POST /api/auth/e2e/bootstrap` returns HTTP 404
+- Unauthenticated `GET /settings/channels/email` → 307 redirect to `/login`
+- Authenticated (admin cookie set) `GET /settings/channels/email` → HTTP 200
+- Playwright suite `e2e/gmail-inbox.smoke.spec.ts` passes 5/5 on chromium project
+
+### Relationship to DEC-033
+DEC-034 does NOT defeat DEC-033. DEC-034 governs a test-only auth bootstrap for AKIOR admin routes. DEC-033 governs the Google/Gmail credential model and remains fully active: this bootstrap mints an AKIOR admin session only — no Google credentials exist anywhere in this flow. The Gmail browser-session lane established by DEC-031 is unchanged.
+
+### Exclusions — Things DEC-034 Does NOT Authorize
+- No middleware bypass for real users
+- No disabling of CSRF or session verification
+- No production enablement of `PLAYWRIGHT_E2E_AUTH`
+- No Google/Gmail credential revival of any kind
+- No multi-tenant extension (AKIOR Light / Cloud will require a separate decision)
+
+### Originating Task
+GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP — verified 2026-04-13.
