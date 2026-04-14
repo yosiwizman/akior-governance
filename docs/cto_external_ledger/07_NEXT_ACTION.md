@@ -1,14 +1,23 @@
 # 07_NEXT_ACTION.md — Exact Next Instruction
-# This file always contains the copy-paste ready instruction for Claude Code.
-# CEO pastes the INSTRUCTION BLOCK directly into Claude Code terminal.
+# This file records the CLOSED task history in chronological order (newest first
+# below the header) and carries the current queue state. The CTO picks the next
+# bounded lane when the queue is EMPTY; there is no automatic next step.
 
 ---
 
-## CURRENT TASK
+## CURRENT STATE
+
+**Current queue:** EMPTY. Product anchor is `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` (PR #121 merge). Governance anchor matches. Cluster 04 (3D-print, alert #54) remains locked-lane excluded and is NOT the automatic next task. No active `INSTRUCTION BLOCK` is in force; any prior `INSTRUCTION BLOCK` below is historical archive only and must not be re-run.
+
+See the newest CLOSED task entry immediately below for the most recent closure. Older CLOSED entries follow in reverse chronological order.
+
+---
+
+## CLOSED TASK HISTORY (newest first)
 
 **Task ID:** PRODUCT-ANCHOR-ADVANCE-01
 **Status:** CLOSED — 2026-04-13 (post-PR#114-merge update). Product anchor advanced to `e9f285186f2cd1cc474bff93cca0249e064e4307` (merge commit for PR #114). Chain: `bc10fe3 (3D-PRINT-CLOSURE) → cf04d99 (GMAIL-READ) → 5d8f704 (AUTH-BOOTSTRAP DEC-034) → d49d3e2 (TYPECHECK-REPAIR-01) → e1093d1 (SETTINGS-CONTRACT-RETIRE-01) → 2db8ab1 (SMOKE-PROBES-RETIRE-01) → e9f2851 (merge commit) → LOCKED`. Governance ratified in parallel.
-**Current queue:** EMPTY. Next bounded lane to be chosen by CTO.
+**Current queue:** EMPTY. Historical entry — do not re-run.
 ---
 **Task ID:** PR-115-E2E-FULL-GREEN-AND-ANCHOR-ROLL-01
 **Status:** CLOSED — 2026-04-13. Product anchor advanced to `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` (merge commit for PR #115). E2E Smoke Tests (Playwright) full green (99 passed / 0 failed). All 14 CI checks pass. Governance ratified in parallel (sync/anchor-roll-after-pr115-01).
@@ -43,7 +52,9 @@
 **Current queue:** EMPTY. CTO picks next bounded lane.
 **Notes:** Prior frozen queue (3D-PRINT-QUICK-VERIFY-01, GMAIL-READ-CAPABILITY-PLAN-01) RETIRED — both CLOSED. GMAIL-READ-INBOX-01/02/03 chain CLOSED / VERIFIED (see 03_STATUS.md). Product repo carries uncommitted changes across three verified lanes (3D-print closure, Gmail read implementation, E2E auth bootstrap). This task locks those changes into a new baseline product anchor.
 
-### INSTRUCTION BLOCK
+### INSTRUCTION BLOCK — HISTORICAL ARCHIVE (DO NOT RE-RUN)
+
+This INSTRUCTION BLOCK was the copy-paste prompt for PRODUCT-ANCHOR-ADVANCE-01 when that task was active on 2026-04-13. That task is CLOSED and the product anchor has since advanced through PR #115 → #116 → #117 → #118 → #119 → #120 → #121. Kept only as archive. Do not paste into any terminal.
 
 ```
 Bounded task: PRODUCT-ANCHOR-ADVANCE-01
@@ -99,7 +110,7 @@ Success criteria:
 
 ## AFTER THIS TASK
 
-Queue is empty after PRODUCT-ANCHOR-ADVANCE-01 completes. CTO chooses the next bounded lane. Candidates (CTO picks — not Claude): Gmail inbox polish, AKIOR Light scoping, holomat follow-ups.
+Queue is EMPTY on the current ledger. CTO chooses the next bounded lane — there is no automatic next step. Cluster 04 (3D-print rate-limit, alert #54) remains locked-lane excluded and is NOT the automatic next task; unlocking it requires an explicit new CTO decision. Candidate future work (CTO picks, not Claude): auth-middleware gap on `/api/channels/gmail/inbox*`, Google Calendar canonical slice (clone of the proven Gmail browser-session pattern), AKIOR Light / Cloud pattern-inheritance scoping, Cluster 04 unlock decision.
 
 ---
 
