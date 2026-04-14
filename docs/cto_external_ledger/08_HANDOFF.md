@@ -131,13 +131,13 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ## Active Next Task
 
-**`PRODUCT-ANCHOR-ADVANCE-01`** — Commit the verified 3D-print closure and Gmail read E2E lanes into a new product anchor commit on `main`. See `07_NEXT_ACTION.md` for the copy-paste instruction block.
+**None queued.** Queue is EMPTY. CTO chooses the next bounded lane — there is no automatic next step. Cluster 04 (3D-print rate-limit, alert #54) remains locked-lane excluded and is NOT the automatic next task; unlocking requires an explicit new CTO decision. Prior `PRODUCT-ANCHOR-ADVANCE-01` framing is CLOSED (2026-04-13) and its INSTRUCTION BLOCK in `07_NEXT_ACTION.md` is archived — do not re-run. Current product anchor is `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10`; governance anchor matches.
 
-Steps expected:
-1. Stage all verified, uncommitted working-tree changes in the product repo
-2. Commit with a bounded message referencing 3D-PRINT-STRICT-CLOSURE-01 and GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP
-3. Record new HEAD sha in `03_STATUS.md` and update the baseline anchor reference
-4. Update `07_NEXT_ACTION.md` to the next queued task after anchor lock
+Candidate future work (CTO picks, not Claude):
+- auth-middleware gap on `/api/channels/gmail/inbox*`
+- Google Calendar canonical slice (clone of the proven Gmail browser-session pattern) — NOT automatic; requires explicit CTO task prompt
+- AKIOR Light / Cloud pattern-inheritance scoping
+- Cluster 04 unlock decision
 
 ---
 
@@ -176,5 +176,5 @@ Steps expected:
 5. Confirm Gmail read = CLOSED via GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP — do not reopen
 6. Confirm DEC-033 ACTIVE — no credential files, no CEO Google console burden
 7. Confirm DEC-034 ACTIVE — `PLAYWRIGHT_E2E_AUTH=1` is test-only
-8. Next task = PRODUCT-ANCHOR-ADVANCE-01 (anchor commit only)
+8. Next task = OPEN. Queue is EMPTY. CTO picks the next bounded lane. Cluster 04 is locked-lane excluded and NOT automatic. Prior `PRODUCT-ANCHOR-ADVANCE-01` is CLOSED — do not re-run.
 9. Do NOT reopen any closed lane or prior phase
