@@ -13,6 +13,10 @@
 **Task ID:** PR-115-E2E-FULL-GREEN-AND-ANCHOR-ROLL-01
 **Status:** CLOSED — 2026-04-13. Product anchor advanced to `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` (merge commit for PR #115). E2E Smoke Tests (Playwright) full green (99 passed / 0 failed). All 14 CI checks pass. Governance ratified in parallel (sync/anchor-roll-after-pr115-01).
 **Current queue:** EMPTY. CTO picks next bounded lane.
+---
+**Task ID:** CODEQL-CHANNELS-SECURITY-HARDENING-01
+**Status:** CLOSED — 2026-04-13. Product anchor advanced to `508dabfe031ffc233a8c2b77bc093c7e04ac97fb` (merge commit for PR #116). 6 high-severity channels CodeQL alerts closed (rate-limit ×2, URL substring ×1+3 adjacent, path-injection ×2). 13 CI checks green. Out-of-scope carryover: WhatsApp rate-limit alert at index.ts:5160 + 22 non-channels rate-limit alerts + 3dprint/storage/log-injection findings.
+**Current queue:** EMPTY. CTO picks next bounded lane.
 **Notes:** Prior frozen queue (3D-PRINT-QUICK-VERIFY-01, GMAIL-READ-CAPABILITY-PLAN-01) RETIRED — both CLOSED. GMAIL-READ-INBOX-01/02/03 chain CLOSED / VERIFIED (see 03_STATUS.md). Product repo carries uncommitted changes across three verified lanes (3D-print closure, Gmail read implementation, E2E auth bootstrap). This task locks those changes into a new baseline product anchor.
 
 ### INSTRUCTION BLOCK
