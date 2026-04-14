@@ -3,6 +3,14 @@
 
 ---
 
+## Handoff Anchor 2026-04-14 — CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-02-EXTERNAL-API COMPLETE
+
+### Current Posture (read before any new CTO session)
+
+Cluster 02 of the non-channel rate-limit lane is closed. Product anchor advanced from `76aa4fb…` to `3931498d99b3b7ca0e6fedb3e549e1b570b32a74` via PR #120 (merge 2026-04-14). Six CodeQL js/missing-rate-limiting alerts retired on live main (all fixed_at=2026-04-14T17:54:14Z) — #58 ollama/models, #60 elevenlabs/tts, #61 azure-tts/tts, #62 spotify/search, #65 weather/query, #66 openai/text-chat. Single-file bounded edit in `apps/server/src/index.ts` (+84/-0): rate-limit prelude inserted at the top of each of the six external-API handlers, using the same proven reusable `checkRateLimit + RateLimitPresets` helper shape that closed Cluster 01. Paid outbound APIs (elevenlabs/azure-tts/openai) use ADMIN_MODERATE; read-only external/local (ollama/spotify/weather) use ADMIN_LIGHT. No new framework, no plugin, no middleware, no auth-semantic change. 13/13 CI checks green. **Scope boundary:** Cluster 03 (user-data CRUD, 9 alerts) remains carryover. Cluster 04 (3D-print, 1 alert) is locked-lane excluded. Cumulative non-channel lane status: 10/20 alerts retired, 9 carryover, 1 locked. The broader non-channel rate-limit lane is NOT fully retired. CTO picks next bounded lane.
+
+---
+
 ## Handoff Anchor 2026-04-14 — CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-01-LLM-AUTH COMPLETE
 
 ### Current Posture (read before any new CTO session)
@@ -42,8 +50,10 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 ---
 
 ### Locked Baseline
-- Current anchor: `76aa4fbdae34454114479a6a3e39aa38847d05c5` (merge commit for PR #119, 2026-04-14, non-channel rate-limit Cluster 01 LLM/Auth closure)
-- Prior anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (PR #118 merge, 2026-04-14, insecure-randomness closure) — retained by GMAIL-INBOX-LIST-CANONICAL-E2E-01 closure (proof task, no product mutation)
+- Current anchor: `3931498d99b3b7ca0e6fedb3e549e1b570b32a74` (merge commit for PR #120, 2026-04-14, non-channel rate-limit Cluster 02 external-API closure)
+- Prior anchor: `76aa4fbdae34454114479a6a3e39aa38847d05c5` (PR #119 merge, 2026-04-14, non-channel rate-limit Cluster 01 LLM/Auth closure)
+- Lanes locked by PR #120: 6 CodeQL js/missing-rate-limiting alerts closed (#58, #60, #61, #62, #65, #66) by commit `8b6edb2`. Post-merge live CodeQL re-scan confirms all six `state=fixed, fixed_at=2026-04-14T17:54:14Z`.
+- Cumulative non-channel rate-limit lane status: 10/20 alerts retired (Cluster 01: 4, Cluster 02: 6). Cluster 03 (user-data CRUD, 9 alerts, index.ts) carryover. Cluster 04 (3D-print, 1 alert) locked-lane excluded.
 - Lanes locked by PR #119: 4 CodeQL js/missing-rate-limiting alerts closed (#53, #55, #56, #57). Commit `24abc8b` added rate-limit prelude before authorization in `auth.routes.ts` pin-login (guard tightened) and in the three admin llm handlers. Post-merge live CodeQL re-scan confirms all four alerts `state=fixed, fixed_at=2026-04-14T15:58:44Z`.
 - Canonical capability proof 2026-04-14: GMAIL-INBOX-LIST-CANONICAL-E2E-01 CLOSED against the prior anchor `9adc7fb…`. Screenshot artifact: `test-results/gmail-inbox-smoke.png` in the product repo working tree (not committed; proof artifact only).
 - Carryover for the non-channel rate-limit lane: Cluster 02 (external-API, 6 alerts, index.ts), Cluster 03 (user-data CRUD, 9 alerts, index.ts). Cluster 04 (3D-print, 1 alert) locked-lane excluded.
