@@ -1,5 +1,5 @@
 # 09_FRESH_CHAT_CTO_HANDOFF.md
-# Last updated: 2026-04-14 (post Cluster 03 governance anchor-roll merged)
+# Last updated: 2026-04-14 (post Cluster 03 governance anchor-roll + handoff refresh + ledger consistency repair merged through PR #11)
 # Audience: a fresh AKIOR CTO chat session resuming work mid-stream.
 # Style: crisp, evidence-based, no hype. No soft summaries.
 
@@ -20,8 +20,8 @@ Single source of truth for a brand-new CTO chat to resume work without re-readin
 
 - **Product main SHA:** `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10`
 - **Product tag:** locked by CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-03-USER-DATA-CRUD (PR #121 squash-merge, 2026-04-14).
-- **Governance main SHA:** `7918b5e457bd673a57bb66b7b4ce16b17d6de06e`
-- **Governance tag:** locked by GOV-ANCHOR-ROLL-AFTER-RATE-LIMIT-CLUSTER-03 (PR #9 squash-merge, 2026-04-14).
+- **Governance main SHA:** `3e86d6fdbf4d93cadf3d54656a4a375501e3e884`
+- **Governance tag:** locked by GOV-LEDGER-CONSISTENCY-REPAIR-01 (PR #11 squash-merge, 2026-04-14). Prior governance rolls on the same day: PR #9 GOV-ANCHOR-ROLL-AFTER-RATE-LIMIT-CLUSTER-03 (→ `7918b5e4…`), PR #10 GOV-FRESH-CHAT-CTO-HANDOFF-REFRESH-01 (→ `22e7cae7…`), PR #11 removed the last stale `PRODUCT-ANCHOR-ADVANCE-01` live framing from 03/07/08 (→ `3e86d6fd…`).
 - Governance follow-through for Cluster 03 is **CURRENT** on tracked main. If on session start you observe a newer product SHA that does not match `3d81f2c…`, re-verify §2 before acting.
 - Repos: product `yosiwizman/jarvis-v5-os`, governance `yosiwizman/akior-governance`.
 
@@ -102,7 +102,7 @@ Candidate lanes for the CTO to weigh (not ranked, not authorised here):
 | Repo | Branch | SHA |
 |---|---|---|
 | Product (`jarvis-v5-os`) | `main` | `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` |
-| Governance (`akior-governance`) | `main` | `7918b5e457bd673a57bb66b7b4ce16b17d6de06e` |
+| Governance (`akior-governance`) | `main` | `3e86d6fdbf4d93cadf3d54656a4a375501e3e884` |
 
 Verification commands (run first in any new session):
 ```
@@ -110,7 +110,7 @@ cd ~/projects/akior/forge/jarvis-v5-os && git fetch origin main --quiet && git r
 cd ~/akior/docs && git fetch origin main --quiet && git rev-parse origin/main
 grep "jarvis-v5-os HEAD" ~/akior/docs/cto_external_ledger/RESTORE_BLOCK.txt
 ```
-Expected: product `3d81f2c…`, governance `7918b5e4…`, anchor line shows `3d81f2c…`.
+Expected: product `3d81f2c…`, governance `3e86d6fd…`, anchor line shows `3d81f2c…`.
 
 ---
 
@@ -190,7 +190,7 @@ grep "jarvis-v5-os HEAD" ~/akior/docs/cto_external_ledger/RESTORE_BLOCK.txt
 
 Expected results:
 - product `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10`
-- governance `7918b5e457bd673a57bb66b7b4ce16b17d6de06e`
+- governance `3e86d6fdbf4d93cadf3d54656a4a375501e3e884`
 - anchor line: `- jarvis-v5-os HEAD: 3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10`
 
 If any of the three differs from the above, §2 and §7 of this handoff are stale — re-read both repos' ledgers before proceeding.
