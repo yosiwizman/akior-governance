@@ -3,6 +3,14 @@
 
 ---
 
+## Handoff Anchor 2026-04-14 — CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-03-USER-DATA-CRUD COMPLETE
+
+### Current Posture (read before any new CTO session)
+
+Cluster 03 of the non-channel rate-limit lane is closed. Product anchor advanced from `3931498…` to `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` via PR #121 (merge 2026-04-14). Nine CodeQL js/missing-rate-limiting alerts retired on live main (all fixed_at=2026-04-14T18:59:27Z) — #59 memory, #63 settings-GET, #64 settings-POST, #67 file-library-GET, #68 file-library-DELETE, #69 images, #70 tasks, #71 dnd, #72 contacts. Single-file bounded edit in `apps/server/src/index.ts`: rate-limit prelude inserted at the top of each of the nine user-data CRUD handlers; four one-liner handlers (#67/#70/#71/#72) expanded to receive (req, reply). PR #121 landed in two commits: `c7f2bf2` initial preludes, then `db04efa` in-PR bucket fixup after the first CI E2E run hit a 429 cascade on polled GET endpoints (evidence: run id 24416602047). READ endpoints now use inline `{maxAttempts:600, windowMs:60_000, lockoutMs:60_000}` (10 req/sec, 1-min lockout); MUTATING endpoints (POST settings, DELETE file-library) keep `ADMIN_MODERATE`. Same helper, same prelude shape, single-file boundary preserved. Second CI run: 13/13 green. **Scope boundary:** Cumulative non-channel rate-limit lane status = 19/20 retired (C01: 4, C02: 6, C03: 9). Cluster 04 (3D-print alert #54, 1 alert) is locked-lane excluded and is the sole remaining carryover. Do not begin Cluster 04 implementation — the 3D-print lane is LOCKED per RESTORE_BLOCK.txt and requires an explicit new CTO decision to unlock. CTO picks next bounded lane.
+
+---
+
 ## Handoff Anchor 2026-04-14 — CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-02-EXTERNAL-API COMPLETE
 
 ### Current Posture (read before any new CTO session)
@@ -50,10 +58,10 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 ---
 
 ### Locked Baseline
-- Current anchor: `3931498d99b3b7ca0e6fedb3e549e1b570b32a74` (merge commit for PR #120, 2026-04-14, non-channel rate-limit Cluster 02 external-API closure)
-- Prior anchor: `76aa4fbdae34454114479a6a3e39aa38847d05c5` (PR #119 merge, 2026-04-14, non-channel rate-limit Cluster 01 LLM/Auth closure)
-- Lanes locked by PR #120: 6 CodeQL js/missing-rate-limiting alerts closed (#58, #60, #61, #62, #65, #66) by commit `8b6edb2`. Post-merge live CodeQL re-scan confirms all six `state=fixed, fixed_at=2026-04-14T17:54:14Z`.
-- Cumulative non-channel rate-limit lane status: 10/20 alerts retired (Cluster 01: 4, Cluster 02: 6). Cluster 03 (user-data CRUD, 9 alerts, index.ts) carryover. Cluster 04 (3D-print, 1 alert) locked-lane excluded.
+- Current anchor: `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` (merge commit for PR #121, 2026-04-14, non-channel rate-limit Cluster 03 user-data CRUD closure)
+- Prior anchor: `3931498d99b3b7ca0e6fedb3e549e1b570b32a74` (PR #120 merge, 2026-04-14, non-channel rate-limit Cluster 02 external-API closure)
+- Lanes locked by PR #121: 9 CodeQL js/missing-rate-limiting alerts closed (#59, #63, #64, #67, #68, #69, #70, #71, #72) by commits `c7f2bf2` (initial preludes) + `db04efa` (in-PR bucket fixup: READ buckets raised to 600/min/60s-lockout after first CI E2E 429 cascade). Post-merge live CodeQL re-scan confirms all nine `state=fixed, fixed_at=2026-04-14T18:59:27Z`.
+- Cumulative non-channel rate-limit lane status: **19/20 alerts retired** (Cluster 01: 4, Cluster 02: 6, Cluster 03: 9). Cluster 04 (3D-print, alert #54, 1 alert) is locked-lane excluded and is the sole remaining carryover — the 3D-print lane is LOCKED and requires an explicit new CTO decision to unlock before any limiter can be added there.
 - Lanes locked by PR #119: 4 CodeQL js/missing-rate-limiting alerts closed (#53, #55, #56, #57). Commit `24abc8b` added rate-limit prelude before authorization in `auth.routes.ts` pin-login (guard tightened) and in the three admin llm handlers. Post-merge live CodeQL re-scan confirms all four alerts `state=fixed, fixed_at=2026-04-14T15:58:44Z`.
 - Canonical capability proof 2026-04-14: GMAIL-INBOX-LIST-CANONICAL-E2E-01 CLOSED against the prior anchor `9adc7fb…`. Screenshot artifact: `test-results/gmail-inbox-smoke.png` in the product repo working tree (not committed; proof artifact only).
 - Carryover for the non-channel rate-limit lane: Cluster 02 (external-API, 6 alerts, index.ts), Cluster 03 (user-data CRUD, 9 alerts, index.ts). Cluster 04 (3D-print, 1 alert) locked-lane excluded.
