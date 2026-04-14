@@ -33,7 +33,7 @@ GOOGLE TRACK:
 
 PROVEN WORKING:
 - WhatsApp QR link (DEC-032) + WhatsApp send (Direction A) — both verified.
-- Gmail browser-session lane (DEC-031) — PROVEN end-to-end: backend /api/channels/gmail/{status,accounts,inbox-summary,inbox} 200 + GmailInboxList UI renders + Playwright 5/5 green on e2e/gmail-inbox.smoke.spec.ts. Locked at commit cf04d99.
+- Gmail browser-session lane (DEC-031) — PROVEN end-to-end: backend /api/channels/gmail/{status,accounts,inbox-summary,inbox} 200 + GmailInboxList UI renders + Playwright 5/5 green on e2e/gmail-inbox.smoke.spec.ts. Locked at commit cf04d99. Re-proven canonically on 2026-04-14 by GMAIL-INBOX-LIST-CANONICAL-E2E-01 against unchanged product anchor 9adc7fb (NO product mutation): gateway running:true, live signed-in Gmail tab, all four endpoints live (unread=12, rowCount=62), UI connected-state rendered, Playwright chromium 5/5. Capability-factory gate proven for one canonical Google/Gmail read slice. Calendar/Drive/Contacts NOT implemented.
 - 3D-print lane — PROVEN end-to-end: Playwright 5/5 green on e2e/3dprinters.smoke.spec.ts, real printer 3DP-22E-409 MQTT-connected. Locked at commit bc10fe3.
 - E2E auth bootstrap (DEC-034) — PROVEN: env-gated (404 when off), auth wall preserved (unauth 307 → /login), chromium-only storageState. Locked at commit 5d8f704; merged to main via e9f2851.
 - Chat via Ollama qwen2.5:72b.

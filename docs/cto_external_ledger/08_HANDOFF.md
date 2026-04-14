@@ -3,6 +3,14 @@
 
 ---
 
+## Handoff Anchor 2026-04-14 — GMAIL-INBOX-LIST-CANONICAL-E2E-01 COMPLETE
+
+### Current Posture (read before any new CTO session)
+
+Capability-factory gate proven: one canonical Google/Gmail read slice is now end-to-end verified on the approved browser-first / inside-system architecture (DEC-031 managed-browser lane, DEC-033 credential-purge posture). The proof was achieved with **zero product code changes**. Product anchor is **RETAINED** at `9adc7fb13e35293ff866ea7717fed288933de965`. Live evidence: OpenClaw gateway `running:true pid:3209842`, signed-in Gmail tab at `mail.google.com` (identity `yosiwizman5638@gmail.com`), Gmail API endpoints `/accounts /status /inbox-summary /inbox` all HTTP 200 with live payloads (unread=12, rowCount=62, 3 real messages), UI `/settings/channels/email` renders connected-state card with populated `GmailInboxList`, Playwright chromium `e2e/gmail-inbox.smoke.spec.ts` 5/5 passed (incl. the live-session-required inbox-list spec that skips in CI). Screenshot: `test-results/gmail-inbox-smoke.png`. This proof **does not mean** Calendar/Drive/Contacts are implemented — those remain future clone candidates of this proven pattern, not executed here. Bounded queue remains EMPTY. CTO picks next bounded lane.
+
+---
+
 ## Handoff Anchor 2026-04-14 — CODEQL-CHANNELS-INSECURE-RANDOMNESS-IDENTITY-TRUTH-04B COMPLETE
 
 ### Current Posture (read before any new CTO session)
@@ -26,8 +34,9 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 ---
 
 ### Locked Baseline
-- Current anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (merge commit for PR #118, 2026-04-14, insecure-randomness closure)
+- Current anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (merge commit for PR #118, 2026-04-14, insecure-randomness closure) — RETAINED by GMAIL-INBOX-LIST-CANONICAL-E2E-01 closure (proof task, no product mutation)
 - Prior anchor: `7654a9a3668f1f2475fbf27d537377196c68c708` (PR #117 merge, 2026-04-14, path-injection closure)
+- Canonical capability proof 2026-04-14: GMAIL-INBOX-LIST-CANONICAL-E2E-01 CLOSED against the same anchor. Evidence above in Current Posture. Screenshot artifact: `test-results/gmail-inbox-smoke.png` in the product repo working tree (not committed; proof artifact only).
 - Lanes locked by PR #118: CodeQL js/insecure-randomness alert #1 closed at `apps/server/src/channels/accountsIndex.ts:179`. Commit `09e22df` replaces `Math.random().toString(36).slice(2, 8)` with `randomBytes(4).toString("hex").slice(0, 6)` inside `mintAccount` (+2 / -1, 1 file). Post-merge live CodeQL re-scan confirms alert #1 state=fixed, fixed_at=2026-04-14T11:52:23Z. All channels-surface CodeQL high-severity alerts retired. Non-channel `js/missing-rate-limiting` lane is now authorizable for a dedicated future bounded task.
 - Lanes locked by PR #117: CodeQL js/path-injection alerts #6 + #7 closed at browserSession.ts:206 via `path.basename()` canonical sanitizer at sink. Commits: `fe87a2f` (initial containment-check attempt; CodeQL did not recognize the pattern), `7a96d82` (switched to `path.basename()` which IS CodeQL-canonical). Post-merge live CodeQL re-scan (2026-04-14T01:53:49Z) confirms both alerts state=fixed.
 - Lanes locked by PR #116: CodeQL channels security hardening — 6 high-severity alerts closed. `4b4279d` (rate-limit on counts + account-delete), `d83adb0` (URL host-match replaces substring), `0af1ef6` (providerId + prefix path-validation).
