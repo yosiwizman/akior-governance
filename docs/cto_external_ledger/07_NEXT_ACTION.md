@@ -19,7 +19,11 @@
 **Current queue:** EMPTY. CTO picks next bounded lane.
 ---
 **Task ID:** CODEQL-CHANNELS-PATH-INJECTION-CLOSURE-03
-**Status:** CLOSED — 2026-04-14. Product anchor advanced to `7654a9a3668f1f2475fbf27d537377196c68c708` (merge commit for PR #117). Path-injection alerts #6 and #7 on `apps/server/src/channels/providers/browserSession.ts:206` retired on live main (state=fixed, fixed_at=2026-04-14T01:53:49Z). Carryover blocker: `js/insecure-randomness` at `accountsIndex.ts:179` — explicitly out of scope for this task; remains OPEN for a dedicated future bounded task. Non-channel `js/missing-rate-limiting` work also remains deferred until all channels-surface CodeQL findings are fully retired.
+**Status:** CLOSED — 2026-04-14. Product anchor advanced to `7654a9a3668f1f2475fbf27d537377196c68c708` (merge commit for PR #117). Path-injection alerts #6 and #7 on `apps/server/src/channels/providers/browserSession.ts:206` retired on live main (state=fixed, fixed_at=2026-04-14T01:53:49Z). Carryover blocker `js/insecure-randomness` at `accountsIndex.ts:179` was deferred to a dedicated bounded task and is now CLOSED — see next entry.
+**Current queue:** EMPTY. CTO picks next bounded lane.
+---
+**Task ID:** CODEQL-CHANNELS-INSECURE-RANDOMNESS-IDENTITY-TRUTH-04B
+**Status:** CLOSED — 2026-04-14. Product anchor advanced to `9adc7fb13e35293ff866ea7717fed288933de965` (merge commit for PR #118). Exact historical alert recovered as alert #1 (js/insecure-randomness at `apps/server/src/channels/accountsIndex.ts:179`), proven OPEN on live main pre-fix via explicit state-scoped queries. Minimal channels-only fix in `mintAccount`: replaced `Math.random().toString(36).slice(2, 8)` with `randomBytes(4).toString("hex").slice(0, 6)` (+2 / -1, 1 file). All 13 CI checks green on PR #118 head. Post-merge live CodeQL re-scan confirms alert #1 state=fixed, fixed_at=2026-04-14T11:52:23Z. All channels-surface CodeQL high-severity findings are now retired. Non-channel `js/missing-rate-limiting` lane is now AUTHORIZABLE as the next bounded task (CTO picks).
 **Current queue:** EMPTY. CTO picks next bounded lane.
 **Notes:** Prior frozen queue (3D-PRINT-QUICK-VERIFY-01, GMAIL-READ-CAPABILITY-PLAN-01) RETIRED — both CLOSED. GMAIL-READ-INBOX-01/02/03 chain CLOSED / VERIFIED (see 03_STATUS.md). Product repo carries uncommitted changes across three verified lanes (3D-print closure, Gmail read implementation, E2E auth bootstrap). This task locks those changes into a new baseline product anchor.
 

@@ -13,7 +13,7 @@
 - **Ledger:** LB-001 → ... → LB-012 → LB-013 (Phase 3) → LB-014 (Phase 4 SEND_FAILED) → LB-015 (Phase 4.5 audit) → Phase 4.12B (VERIFIED SUCCESS)
 - **OPS-CRED-01 / I9-OPS:** ABANDONED / SUPERSEDED by DEC-033. No off-system credential artifacts. No credential-provisioning tracks active.
 - **Hard constraints (inviolable):** no client_secret, no google-credentials.json, no refresh_token revival, no off-system credential staging, no CEO developer-console burden. Normal auth wall intact.
-- **Product anchor:** `7654a9a3668f1f2475fbf27d537377196c68c708` (CODEQL-CHANNELS-PATH-INJECTION-CLOSURE-03, merge commit for PR #117, 2026-04-14). Path-injection alerts #6 and #7 retired on live main (state=fixed, fixed_at=2026-04-14T01:53:49Z). Chain extends with `7a96d82` → `7654a9a` (PR #117 merge) → LOCKED.
+- **Product anchor:** `9adc7fb13e35293ff866ea7717fed288933de965` (CODEQL-CHANNELS-INSECURE-RANDOMNESS-IDENTITY-TRUTH-04B, merge commit for PR #118, 2026-04-14). js/insecure-randomness alert #1 at `apps/server/src/channels/accountsIndex.ts:179` retired on live main (state=fixed, fixed_at=2026-04-14T11:52:23Z) — `Math.random()` replaced with `crypto.randomBytes()` in `mintAccount`. Prior anchor `7654a9a3668f1f2475fbf27d537377196c68c708` retained the path-injection #6/#7 retirement. Chain extends with `09e22df` → `9adc7fb` (PR #118 merge) → LOCKED. All channels-surface CodeQL high-severity alerts now retired.
 - **Next major step:** Google Calendar, Drive, Contacts (future slices). All must use browser-only inside-system auth (DEC-033). No credential entry. No credential files.
 
 ## What Works
