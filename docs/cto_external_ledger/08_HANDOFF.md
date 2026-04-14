@@ -3,7 +3,7 @@
 
 ---
 
-## Handoff Anchor 2026-04-13 — GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP COMPLETE
+## Handoff Anchor 2026-04-14 — CODEQL-CHANNELS-INSECURE-RANDOMNESS-IDENTITY-TRUTH-04B COMPLETE
 
 ### Current Posture (read before any new CTO session)
 
@@ -19,16 +19,17 @@ DEC-033 is active: the Google credential model is purged, browser-only inside-sy
 is in force, and the CEO has zero developer-console burden. DEC-034 documents the E2E auth bootstrap
 posture: `PLAYWRIGHT_E2E_AUTH=1` is only set in the `start:ci` npm script and is never present in
 the Dockerfile or Fly.io configuration, making it test-only and production-safe. The product repo
-anchor has been advanced to `7654a9a3668f1f2475fbf27d537377196c68c708` by CODEQL-CHANNELS-PATH-INJECTION-CLOSURE-03 (merge commit for PR #117 retiring path-injection alerts #6 and #7 on browserSession.ts via canonical path.basename() sanitizer at sink). Prior anchor `508dabfe031ffc233a8c2b77bc093c7e04ac97fb` came from CODEQL-CHANNELS-SECURITY-HARDENING-01 (merge commit for PR #116 closing 6 high-severity channels CodeQL alerts: rate-limit ×2, URL-substring ×1+3 adjacent, path-injection ×2). Prior anchor `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` was PR #115 E2E-full-green
+anchor has been advanced to `9adc7fb13e35293ff866ea7717fed288933de965` by CODEQL-CHANNELS-INSECURE-RANDOMNESS-IDENTITY-TRUTH-04B (merge commit for PR #118 retiring js/insecure-randomness alert #1 at accountsIndex.ts:179 by replacing Math.random() with crypto.randomBytes() in mintAccount). Prior anchor `7654a9a3668f1f2475fbf27d537377196c68c708` was from CODEQL-CHANNELS-PATH-INJECTION-CLOSURE-03 (merge commit for PR #117 retiring path-injection alerts #6 and #7 on browserSession.ts via canonical path.basename() sanitizer at sink). Prior anchor `508dabfe031ffc233a8c2b77bc093c7e04ac97fb` came from CODEQL-CHANNELS-SECURITY-HARDENING-01 (merge commit for PR #116 closing 6 high-severity channels CodeQL alerts: rate-limit ×2, URL-substring ×1+3 adjacent, path-injection ×2). Prior anchor `e95aed32ef49cea7e2b674e097cfeaec6a6ad696` was PR #115 E2E-full-green
 (merge commit for PR #115 bringing seven E2E repair commits on top of the prior PR #114 baseline: `a32e250` DEC-033-repair, `f6b7e36` llm-provider-repair-01, `949bf91` auth-branding-repair, `de71306` device-trust-repair, `2ed20a7` gmail-inbox-ci-skip, `7cc1355` llm-provider-repair-02). E2E Smoke Tests (Playwright) now fully green.
 The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ---
 
 ### Locked Baseline
-- Current anchor: `7654a9a3668f1f2475fbf27d537377196c68c708` (merge commit for PR #117, 2026-04-14, path-injection closure)
-- Prior anchor: `508dabfe031ffc233a8c2b77bc093c7e04ac97fb` (PR #116 merge, 2026-04-13, CodeQL channels hardening)
-- Lanes locked by PR #117: CodeQL js/path-injection alerts #6 + #7 closed at browserSession.ts:206 via `path.basename()` canonical sanitizer at sink. Commits: `fe87a2f` (initial containment-check attempt; CodeQL did not recognize the pattern), `7a96d82` (switched to `path.basename()` which IS CodeQL-canonical). Post-merge live CodeQL re-scan (2026-04-14T01:53:49Z) confirms both alerts now state=fixed. Open channels-surface blocker remaining: `js/insecure-randomness` at `accountsIndex.ts:179` (explicit task-scope exclusion, deferred).
+- Current anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (merge commit for PR #118, 2026-04-14, insecure-randomness closure)
+- Prior anchor: `7654a9a3668f1f2475fbf27d537377196c68c708` (PR #117 merge, 2026-04-14, path-injection closure)
+- Lanes locked by PR #118: CodeQL js/insecure-randomness alert #1 closed at `apps/server/src/channels/accountsIndex.ts:179`. Commit `09e22df` replaces `Math.random().toString(36).slice(2, 8)` with `randomBytes(4).toString("hex").slice(0, 6)` inside `mintAccount` (+2 / -1, 1 file). Post-merge live CodeQL re-scan confirms alert #1 state=fixed, fixed_at=2026-04-14T11:52:23Z. All channels-surface CodeQL high-severity alerts retired. Non-channel `js/missing-rate-limiting` lane is now authorizable for a dedicated future bounded task.
+- Lanes locked by PR #117: CodeQL js/path-injection alerts #6 + #7 closed at browserSession.ts:206 via `path.basename()` canonical sanitizer at sink. Commits: `fe87a2f` (initial containment-check attempt; CodeQL did not recognize the pattern), `7a96d82` (switched to `path.basename()` which IS CodeQL-canonical). Post-merge live CodeQL re-scan (2026-04-14T01:53:49Z) confirms both alerts state=fixed.
 - Lanes locked by PR #116: CodeQL channels security hardening — 6 high-severity alerts closed. `4b4279d` (rate-limit on counts + account-delete), `d83adb0` (URL host-match replaces substring), `0af1ef6` (providerId + prefix path-validation).
 - Lanes locked by PR #115: DEC-033 settings-spec retirement (`a32e250`), llm-provider cluster repair (`f6b7e36` + `7cc1355`), auth + branding anonymous-context repair (`949bf91`), device-trust serveEnabled shape alignment (`de71306`), gmail-inbox CI-skip guard (`2ed20a7`). E2E Smoke Tests (Playwright) CI job now fully green (99 passed / 0 failed).
 - Status: **LOCKED**. Queue empty. CTO picks next bounded lane.
