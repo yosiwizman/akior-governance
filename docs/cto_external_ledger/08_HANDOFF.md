@@ -3,6 +3,14 @@
 
 ---
 
+## Handoff Anchor 2026-04-14 — CODEQL-NON-CHANNELS-RATE-LIMITING-CLUSTER-01-LLM-AUTH COMPLETE
+
+### Current Posture (read before any new CTO session)
+
+Cluster 01 of the non-channel rate-limit lane is closed. Product anchor advanced from `9adc7fb…` to `76aa4fbdae34454114479a6a3e39aa38847d05c5` via PR #119 (merge 2026-04-14). Four CodeQL js/missing-rate-limiting alerts retired on live main (all fixed_at=2026-04-14T15:58:44Z): #53 `auth.routes.ts:163` (pin-login), #55 `llm.routes.ts:91`, #56 `llm.routes.ts:110`, #57 `llm.routes.ts:242`. Bounded edits in two files only (+40/-10): extended/reordered the existing `checkRateLimit + RateLimitPresets` helper so the rate-limit prelude runs BEFORE any authorization check. No new framework, no plugin registration, no middleware refactor. 13/13 CI checks green. **Scope boundary:** Cluster 02 (external-API, 6 alerts) and Cluster 03 (user-data CRUD, 9 alerts) remain carryover — not implemented here. Cluster 04 (3D-print, 1 alert) is locked-lane excluded. The broader non-channel rate-limit lane is NOT fully retired; only Cluster 01 is closed. CTO picks next bounded lane.
+
+---
+
 ## Handoff Anchor 2026-04-14 — GMAIL-INBOX-LIST-CANONICAL-E2E-01 COMPLETE
 
 ### Current Posture (read before any new CTO session)
@@ -34,9 +42,11 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 ---
 
 ### Locked Baseline
-- Current anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (merge commit for PR #118, 2026-04-14, insecure-randomness closure) — RETAINED by GMAIL-INBOX-LIST-CANONICAL-E2E-01 closure (proof task, no product mutation)
-- Prior anchor: `7654a9a3668f1f2475fbf27d537377196c68c708` (PR #117 merge, 2026-04-14, path-injection closure)
-- Canonical capability proof 2026-04-14: GMAIL-INBOX-LIST-CANONICAL-E2E-01 CLOSED against the same anchor. Evidence above in Current Posture. Screenshot artifact: `test-results/gmail-inbox-smoke.png` in the product repo working tree (not committed; proof artifact only).
+- Current anchor: `76aa4fbdae34454114479a6a3e39aa38847d05c5` (merge commit for PR #119, 2026-04-14, non-channel rate-limit Cluster 01 LLM/Auth closure)
+- Prior anchor: `9adc7fb13e35293ff866ea7717fed288933de965` (PR #118 merge, 2026-04-14, insecure-randomness closure) — retained by GMAIL-INBOX-LIST-CANONICAL-E2E-01 closure (proof task, no product mutation)
+- Lanes locked by PR #119: 4 CodeQL js/missing-rate-limiting alerts closed (#53, #55, #56, #57). Commit `24abc8b` added rate-limit prelude before authorization in `auth.routes.ts` pin-login (guard tightened) and in the three admin llm handlers. Post-merge live CodeQL re-scan confirms all four alerts `state=fixed, fixed_at=2026-04-14T15:58:44Z`.
+- Canonical capability proof 2026-04-14: GMAIL-INBOX-LIST-CANONICAL-E2E-01 CLOSED against the prior anchor `9adc7fb…`. Screenshot artifact: `test-results/gmail-inbox-smoke.png` in the product repo working tree (not committed; proof artifact only).
+- Carryover for the non-channel rate-limit lane: Cluster 02 (external-API, 6 alerts, index.ts), Cluster 03 (user-data CRUD, 9 alerts, index.ts). Cluster 04 (3D-print, 1 alert) locked-lane excluded.
 - Lanes locked by PR #118: CodeQL js/insecure-randomness alert #1 closed at `apps/server/src/channels/accountsIndex.ts:179`. Commit `09e22df` replaces `Math.random().toString(36).slice(2, 8)` with `randomBytes(4).toString("hex").slice(0, 6)` inside `mintAccount` (+2 / -1, 1 file). Post-merge live CodeQL re-scan confirms alert #1 state=fixed, fixed_at=2026-04-14T11:52:23Z. All channels-surface CodeQL high-severity alerts retired. Non-channel `js/missing-rate-limiting` lane is now authorizable for a dedicated future bounded task.
 - Lanes locked by PR #117: CodeQL js/path-injection alerts #6 + #7 closed at browserSession.ts:206 via `path.basename()` canonical sanitizer at sink. Commits: `fe87a2f` (initial containment-check attempt; CodeQL did not recognize the pattern), `7a96d82` (switched to `path.basename()` which IS CodeQL-canonical). Post-merge live CodeQL re-scan (2026-04-14T01:53:49Z) confirms both alerts state=fixed.
 - Lanes locked by PR #116: CodeQL channels security hardening — 6 high-severity alerts closed. `4b4279d` (rate-limit on counts + account-delete), `d83adb0` (URL host-match replaces substring), `0af1ef6` (providerId + prefix path-validation).
