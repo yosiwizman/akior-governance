@@ -17,6 +17,10 @@
 **Task ID:** CODEQL-CHANNELS-SECURITY-HARDENING-01
 **Status:** CLOSED — 2026-04-13. Product anchor advanced to `508dabfe031ffc233a8c2b77bc093c7e04ac97fb` (merge commit for PR #116). 6 high-severity channels CodeQL alerts closed (rate-limit ×2, URL substring ×1+3 adjacent, path-injection ×2). 13 CI checks green. Out-of-scope carryover: WhatsApp rate-limit alert at index.ts:5160 + 22 non-channels rate-limit alerts + 3dprint/storage/log-injection findings.
 **Current queue:** EMPTY. CTO picks next bounded lane.
+---
+**Task ID:** CODEQL-CHANNELS-PATH-INJECTION-CLOSURE-03
+**Status:** CLOSED — 2026-04-14. Product anchor advanced to `7654a9a3668f1f2475fbf27d537377196c68c708` (merge commit for PR #117). Path-injection alerts #6 and #7 on `apps/server/src/channels/providers/browserSession.ts:206` retired on live main (state=fixed, fixed_at=2026-04-14T01:53:49Z). Carryover blocker: `js/insecure-randomness` at `accountsIndex.ts:179` — explicitly out of scope for this task; remains OPEN for a dedicated future bounded task. Non-channel `js/missing-rate-limiting` work also remains deferred until all channels-surface CodeQL findings are fully retired.
+**Current queue:** EMPTY. CTO picks next bounded lane.
 **Notes:** Prior frozen queue (3D-PRINT-QUICK-VERIFY-01, GMAIL-READ-CAPABILITY-PLAN-01) RETIRED — both CLOSED. GMAIL-READ-INBOX-01/02/03 chain CLOSED / VERIFIED (see 03_STATUS.md). Product repo carries uncommitted changes across three verified lanes (3D-print closure, Gmail read implementation, E2E auth bootstrap). This task locks those changes into a new baseline product anchor.
 
 ### INSTRUCTION BLOCK
