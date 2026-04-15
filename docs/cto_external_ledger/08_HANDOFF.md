@@ -1,5 +1,19 @@
 # 08_HANDOFF.md — Session Handoff State
-# Last updated: 2026-04-13
+# Last updated: 2026-04-15
+
+---
+
+## Handoff Anchor 2026-04-15 — GOOGLE-WORKSPACE-BUNDLE-CLOSURE-AUDIT-01 COMPLETE
+
+### Current Posture (read before any new CTO session)
+
+The Google Workspace browser-first bundle is operationally **CLOSED as a suite** (audit verdict CLOSED, 2026-04-15). Product anchor is `fa3c4ffd9e85d1e0c237d7d443baf2228d54ed66` (merge commit for PR #133 — Google Contacts minimal list). All four Google providers ship end-to-end on the managed-browser-gateway lane: **Gmail live read** (DEC-031 + canonical E2E), **Google Calendar live read** (PR #127 + fix PR #129 `title-not-signin` predicate), **Google Drive minimal browse** (PR #132), **Google Contacts minimal list** (PR #133). Every admin-guarded Google read endpoint returns HTTP 200 with a truthful envelope; `/api/channels/counts` unauth carve-out returns HTTP 200 with all 6 category keys; auth guards return 401 unauth on every protected read. All 4 settings pages render without errors.
+
+PR chain since Cluster 03 closure: #122 (GMAIL-INBOX-AUTH-GAP fix) → #123/#124/#125 (channels-auth cluster for `:providerId/{accounts,status,connect,disconnect}`) → #126 (google-calendar descriptor + shared `ensureGatewayDefaultAccount(providerId)` parameterization) → #127 (Calendar events read) → #129 (Calendar `title-not-signin` fix) → #130 (google-drive descriptor) → #131 (google-contacts descriptor) → #132 (Drive minimal browse) → #133 (Contacts minimal list).
+
+**Known non-blocking note:** the `[data-id]` CDP selector used by Drive and Contacts picks up some Google WIZ-data script entries alongside truthful file/contact rows. This is carved-out future scope, not an active blocker — endpoints return truthful envelopes; UI displays `…-list` testid correctly.
+
+**Next bounded task:** OPEN — CTO picks. Queue is EMPTY. No automatic next step.
 
 ---
 
@@ -58,7 +72,10 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 ---
 
 ### Locked Baseline
-- Current anchor: `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` (merge commit for PR #121, 2026-04-14, non-channel rate-limit Cluster 03 user-data CRUD closure)
+- Current anchor: `fa3c4ffd9e85d1e0c237d7d443baf2228d54ed66` (merge commit for PR #133, 2026-04-15, GOOGLE-CONTACTS-MINIMAL-LIST-CANONICAL-SLICE-01 — final slice of the Google Workspace browser-first bundle)
+- Google Workspace bundle CLOSED as a suite (GOOGLE-WORKSPACE-BUNDLE-CLOSURE-AUDIT-01, 2026-04-15, verdict CLOSED). Gmail live read + Calendar live read + Drive minimal browse + Contacts minimal list all proven end-to-end.
+- Prior Google-lane anchors: `fffe29d` (PR #132 Drive browse) → `c8649e4` (PR #130 Drive descriptor) → `4fc6bde` (PR #131 Contacts descriptor) → `318076a` (PR #126 Calendar descriptor) → `aac9366` (PR #127 Calendar events) → `59666ec` (PR #129 Calendar predicate fix).
+- Prior baseline anchor: `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10` (PR #121 merge, 2026-04-14, non-channel rate-limit Cluster 03 user-data CRUD closure).
 - Prior anchor: `3931498d99b3b7ca0e6fedb3e549e1b570b32a74` (PR #120 merge, 2026-04-14, non-channel rate-limit Cluster 02 external-API closure)
 - Lanes locked by PR #121: 9 CodeQL js/missing-rate-limiting alerts closed (#59, #63, #64, #67, #68, #69, #70, #71, #72) by commits `c7f2bf2` (initial preludes) + `db04efa` (in-PR bucket fixup: READ buckets raised to 600/min/60s-lockout after first CI E2E 429 cascade). Post-merge live CodeQL re-scan confirms all nine `state=fixed, fixed_at=2026-04-14T18:59:27Z`.
 - Cumulative non-channel rate-limit lane status: **19/20 alerts retired** (Cluster 01: 4, Cluster 02: 6, Cluster 03: 9). Cluster 04 (3D-print, alert #54, 1 alert) is locked-lane excluded and is the sole remaining carryover — the 3D-print lane is LOCKED and requires an explicit new CTO decision to unlock before any limiter can be added there.
@@ -86,7 +103,7 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ### Active Blockers
 - BLK-001: RESOLVED 2026-04-08
-- BLK-002: RESOLVED (Gmail connection card proven; read lane now closed)
+- BLK-002: RESOLVED 2026-04-15 — Google Workspace browser-first bundle CLOSED as a suite (Gmail + Calendar + Drive + Contacts all proven end-to-end)
 - BLK-003: CLOSED 2026-04-09 — WhatsApp Product 1 end-to-end verified
 - BLK-004: ACTIVE (Product 2 only — does not block Product 1)
 
@@ -131,13 +148,14 @@ The bounded queue is now EMPTY — CTO chooses the next bounded lane.
 
 ## Active Next Task
 
-**None queued.** Queue is EMPTY. CTO chooses the next bounded lane — there is no automatic next step. Cluster 04 (3D-print rate-limit, alert #54) remains locked-lane excluded and is NOT the automatic next task; unlocking requires an explicit new CTO decision. Prior `PRODUCT-ANCHOR-ADVANCE-01` framing is CLOSED (2026-04-13) and its INSTRUCTION BLOCK in `07_NEXT_ACTION.md` is archived — do not re-run. Current product anchor is `3d81f2c5ff3d6b53349ec0ae45c61be9ba226d10`; governance anchor matches.
+**None queued.** Queue is EMPTY. CTO chooses the next bounded lane — there is no automatic next step. Google Workspace browser-first bundle is CLOSED as a suite (2026-04-15). Cluster 04 (3D-print rate-limit, alert #54) remains locked-lane excluded and is NOT the automatic next task; unlocking requires an explicit new CTO decision. Prior framings (including `PRODUCT-ANCHOR-ADVANCE-01` and Google-bundle-closure audit) are CLOSED — do not re-run. Current product anchor is `fa3c4ffd9e85d1e0c237d7d443baf2228d54ed66`.
 
 Candidate future work (CTO picks, not Claude):
-- auth-middleware gap on `/api/channels/gmail/inbox*`
-- Google Calendar canonical slice (clone of the proven Gmail browser-session pattern) — NOT automatic; requires explicit CTO task prompt
-- AKIOR Light / Cloud pattern-inheritance scoping
-- Cluster 04 unlock decision
+- AKIOR Light / Cloud pattern-inheritance scoping (governance-level read)
+- Cluster 04 unlock decision (explicit governance-level decision)
+- Drive/Contacts `[data-id]` CDP selector-fidelity refinement (carved-out future scope; not blocking)
+- Any Google write/compose/send/upload/share/delete/search/preview slice — must be browser-only inside-system per DEC-033
+- iMessage lane (not attempted)
 
 ---
 
@@ -146,7 +164,7 @@ Candidate future work (CTO picks, not Claude):
 - Restart from the stale "Gmail UI blocked" or "Gmail read pending" state — that state is closed
 - Re-run or re-verify the 3D-print integration — that lane is closed
 - Reopen DEC-033 or propose any Google credential provisioning
-- Add new Google OAuth surfaces (Calendar, Drive, Contacts) without a new bounded CTO decision
+- Add any Google OAuth / clientId / clientSecret surface (any provider) — DEC-033 posture is locked. Note: Calendar, Drive, and Contacts are already wired via the browser-session-gateway lane, NOT via OAuth; those browser-session lanes are closed.
 - Treat `PLAYWRIGHT_E2E_AUTH=1` as a production flag — it is only valid in `start:ci`
 - Modify `whatsapp-send.ts` or suggest any WhatsApp phone-side action
 - Push to Fly.io or trigger a production deploy without explicit CTO approval
@@ -158,7 +176,11 @@ Candidate future work (CTO picks, not Claude):
 - WhatsApp QR link via AKIOR UI (DEC-032) — verified 2026-04-08
 - WhatsApp send via AKIOR → OpenClaw gateway RPC (Direction A) — verified 2026-04-09
 - 3D-print integration — verified closed (3D-PRINT-STRICT-CLOSURE-01)
-- Gmail read lane end-to-end — verified (GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP)
+- Gmail read lane end-to-end — verified (GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP + GMAIL-INBOX-LIST-CANONICAL-E2E-01)
+- Google Calendar live read end-to-end — verified (PR #127 + fix PR #129), GET /api/channels/google-calendar/events returns HTTP 200 with real events
+- Google Drive minimal browse end-to-end — verified (PR #132), GET /api/channels/google-drive/files returns HTTP 200 with real folder entries
+- Google Contacts minimal list end-to-end — verified (PR #133), GET /api/channels/google-contacts/contacts returns HTTP 200 with truthful envelope
+- Google Workspace browser-first bundle — CLOSED as a suite (GOOGLE-WORKSPACE-BUNDLE-CLOSURE-AUDIT-01, 2026-04-15)
 - Gmail browser-session connection card (DEC-031) — proven prior
 - Chat text via local qwen2.5:72b on Ollama
 - DND toggle, Contacts CRUD, Tasks CRUD
@@ -174,7 +196,8 @@ Candidate future work (CTO picks, not Claude):
 3. Confirm WhatsApp = VERIFIED, BLK-003 CLOSED — do not touch
 4. Confirm 3D-print = CLOSED via 3D-PRINT-STRICT-CLOSURE-01 — do not reopen
 5. Confirm Gmail read = CLOSED via GMAIL-READ-INBOX-03-E2E-AUTH-BOOTSTRAP — do not reopen
-6. Confirm DEC-033 ACTIVE — no credential files, no CEO Google console burden
-7. Confirm DEC-034 ACTIVE — `PLAYWRIGHT_E2E_AUTH=1` is test-only
-8. Next task = OPEN. Queue is EMPTY. CTO picks the next bounded lane. Cluster 04 is locked-lane excluded and NOT automatic. Prior `PRODUCT-ANCHOR-ADVANCE-01` is CLOSED — do not re-run.
-9. Do NOT reopen any closed lane or prior phase
+6. Confirm Google Workspace bundle = CLOSED as a suite via GOOGLE-WORKSPACE-BUNDLE-CLOSURE-AUDIT-01 (Gmail + Calendar + Drive + Contacts all proven) — do not reopen
+7. Confirm DEC-033 ACTIVE — no credential files, no CEO Google console burden
+8. Confirm DEC-034 ACTIVE — `PLAYWRIGHT_E2E_AUTH=1` is test-only
+9. Next task = OPEN. Queue is EMPTY. CTO picks the next bounded lane. Cluster 04 is locked-lane excluded and NOT automatic. Prior `PRODUCT-ANCHOR-ADVANCE-01` is CLOSED — do not re-run.
+10. Do NOT reopen any closed lane or prior phase
